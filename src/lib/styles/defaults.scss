@@ -1,0 +1,4 @@
+/* hide blue outline around atom on focus */
+div#maincontent:focus {
+    box-shadow: none !important;
+}
