@@ -1,6 +1,163 @@
 @import "$lib/styles/fonts.scss";
 @import "$lib/styles/palette.scss";
 @import "$lib/styles/mq.scss";
-@import "$lib/styles/defaults.scss";
-@import "./layout.scss";
+//@import "$lib/styles/defaults.scss";
+//@import "./layout.scss";
+@import "./full_immersive_enhancer.scss";
+@import "./no_header.scss";
+@import "$lib/styles/scrolly.scss";
 // @import "$lib/styles/enhanced_fonts.scss"; // when you need special font features such as lining figures
+
+#gv-wrapper{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+}
+
+#svg-wrapper{
+    min-height: 100vh;
+}
+
+.maplibregl-desktop-message, .maplibregl-mobile-message {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.maplibregl-mobile-message {
+    font-size: 20px;
+    text-align: center;
+}
+
+.mapboxgl-canvas-container.mapboxgl-touch-drag-pan,
+.mapboxgl-canvas-container.mapboxgl-touch-drag-pan .mapboxgl-canvas,
+.maplibregl-canvas-container.maplibregl-touch-drag-pan,
+.maplibregl-canvas-container.maplibregl-touch-drag-pan .maplibregl-canvas {
+    touch-action: pan-x pan-y!important;
+}
+
+.locator-base-map{
+    fill:#fff;
+}
+
+#svg-wrapper path{
+    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.4));
+}
+
+.header-wrapper {
+    
+    position: absolute;
+    top:0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    max-width: 100%;
+    height: 100vh;
+    display: flex;
+    z-index: 1;
+
+    -webkit-transition: opacity 1s;
+    -moz-transition: opacity 1s;
+    -o-transition: opacity 1s;
+    transition: opacity 1s;
+
+    &.hide{
+        pointer-events: none;
+        opacity: 0;
+    }
+
+    .header-wrapper__content{
+        
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        max-width: 620px;
+        padding: 16px;
+        z-index: 2;
+
+        .header-wrapper__content__labels a{
+            top:0;
+            height: 20px;
+            text-decoration: none;
+            color: #ffbb50;
+            background-color: transparent;
+            font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+            font-size: 1.0625rem;
+            line-height: 1.15;
+            font-weight: 700;
+            --source-text-decoration-thickness: 2px;
+            word-break: break-word;
+            border-bottom:none;
+
+        }
+
+        .scroll-text__fixed__header{
+
+            @include mq(mobile) {
+                font-size: 16px;
+            }
+            @include mq(tablet) {
+                font-size: 18px;
+            }
+            line-height: 32px;
+            font-family: "Guardian Headline","Guardian Egyptian Web","Guardian Headline Full",Georgia,serif;
+            font-weight: 400;
+            color: #fff;
+            font-size: 16px;
+            line-height: 22px;
+            margin-top: 18px;
+        }
+    }
+
+    .header-text__wrapper{
+        display: flex;
+    }
+    
+    .content__headline{
+        color: #fff;
+        @include fs-headline(7);    
+    }
+
+
+    .header-background{
+
+        width: 100%;
+        max-width: 100%;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        background-color: #052962;
+        mix-blend-mode:multiply;
+        opacity: .5;
+        position: absolute;
+        z-index: 1;
+
+    }
+
+    .header-wrapper__content{
+        display:flex;
+    }
+
+    .header-wrapper__date,.meta__published__date span{
+        padding-top: 2px;
+        margin-bottom: 6px;
+        font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+        font-size: 12px;
+        line-height: 1.35;
+        font-weight: 400;
+        --source-text-decoration-thickness: 2px;
+        color: $neutral-86;
+    }
+    .header-wrapper__meta__social{margin-top: 8px;}
+    .header-wrapper__meta__social svg{fill:#ffbb50 !important;}
+    .header-wrapper__meta__social svg:hover{fill:white !important;}
+    .header-wrapper__meta__social span:hover{background-color:#ffbb50 !important; border-color:#ffbb50!important;}
+   
+}
+
+

@@ -1,0 +1,105 @@
+// .element-immersive {
+//   width: calc( 100vw - var(--scrollbar-width));
+//   position: relative;
+//   left: 50%;
+//   right: 50%;
+//   margin-left: calc(-50vw + var(--half-scrollbar-width)) !important;
+//   margin-right: calc(-50vw + var(--half-scrollbar-width)) !important;
+
+//   @include mq(tablet) {
+//       transform: translateX(10px);
+//   }
+
+//   @include mq(leftCol) {
+//       transform: translateX(0);
+//   }
+// }
+
+// .ios, .android {
+//   .element--immersive {
+//       width: 100vw !important;
+//       position: relative;
+//       left: 50% !important;
+//       right: 50% !important;
+//       margin-left: -50vw !important;
+//       margin-right: -50vw !important;
+//   }
+// }
+/* ------------------------- */
+
+.element-immersive {
+  width: calc( 100vw - var(--scrollbar-width));
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: calc(-50vw + var(--half-scrollbar-width)) !important;
+  margin-right: calc(-50vw + var(--half-scrollbar-width)) !important;
+
+  @include mq($from: tablet, $until: leftCol) {
+    margin-left: calc(-50vw + var(--half-scrollbar-width) + 10px) !important;
+  }
+
+  @include mq(leftCol) {
+    margin-left: calc(-50vw - 80px + var(--half-scrollbar-width)) !important;
+  }
+  
+  @include mq($from: wide) {
+    margin-left: calc(-50vw - 120px + var(--half-scrollbar-width)) !important;
+  }
+}
+
+.ios, .android {
+  .element--immersive {
+      width: 100vw !important;
+      position: relative;
+      left: 50% !important;
+      right: 50% !important;
+      margin-left: -50vw !important;
+      margin-right: -50vw !important;
+  }
+}
+
+.content__main-column--interactive p, .content__main-column--interactive h2 {
+  max-width: 620px;
+}
+
+.content__main-column--interactive {
+  @include mq(leftCol) {
+      margin-left: 160px;
+  }
+  
+  @include mq(wide) {
+      margin-left: 240px;
+  }
+}
+
+.content__main-column--interactive::before {
+  position: absolute;
+  top: 0px;
+  height: calc(100% + 15px);
+  min-height: 100px;
+  content: "";
+  @include mq($from: leftCol) {
+    border-left:1px solid #dcdcdc;
+    z-index: -1;
+    left: -10px;
+  }
+
+  @include mq($from: wide) {
+    border-left: 1px solid #dcdcdc;
+    left: -11px;
+  }
+}
+
+/* ------------------------- */
+
+/*------ Fix charts width ------*/
+
+
+[title='Interactive Content']{
+  max-width: 620px!important;
+}
+
+// [name='InteractiveBlockComponent']{
+//   pointer-events: none;
+// }

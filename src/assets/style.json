@@ -1,0 +1,426 @@
+{
+    "version": 8,
+    "sources": {
+        "satellite": {
+            "type": "raster",
+            "tiles": [
+                "https://interactive.guim.co.uk/maptiles/ukraine/bakhmut/satellite/{z}/{x}/{y}.jpg"
+            ],
+            "format": "jpg",
+            "tileSize": 256
+        },
+        "terrainSource": {
+            "type": "raster-dem",
+            "tiles": [
+                "https://interactive.guim.co.uk/maptiles/ukraine/bakhmut/terrain/{z}/{x}/{y}.png"
+            ],
+            "format": "png",
+            "tileSize": 256
+        },
+        "hillshadeSource": {
+            "type": "raster-dem",
+            "tiles": [
+                "https://interactive.guim.co.uk/maptiles/ukraine/bakhmut/terrain/{z}/{x}/{y}.png"
+            ],
+            "format": "png",
+            "tileSize": 256
+        },
+        "overlays": {
+            "type": "geojson",
+            "data": null,
+            "lineMetrics": true
+        },
+        "bakhmut":{
+            "type": "geojson",
+            "data": null,
+            "lineMetrics": true
+        },
+        "labels": {
+            "type": "geojson"
+        },
+        "vector-tiles": {
+            "type": "vector",
+            "tiles": [
+                "https://interactive.guim.co.uk/maptiles/world/{z}/{x}/{y}.pbf"
+            ]
+        }
+    },
+    "sprite": "",
+    "glyphs": "https://interactive.guim.co.uk/maptiles/fonts/{fontstack}/{range}.pbf",
+    "layers": [
+        {
+            "id": "background",
+            "type": "background",
+            "paint": {
+                "background-color": "#ffffff"
+            }
+        },
+        {
+            "id": "satellite",
+            "type": "raster",
+            "source": "satellite",
+            "minzoom": 0,
+            "layout": {
+              "visibility": "visible"
+            },
+            "paint": {
+              "raster-opacity": 1,
+              "raster-opacity-transition": {
+                "delay":0,
+                "duration": 100
+              }
+              
+            }
+        },
+        {
+            "id":"overlays",
+            "type":"fill",
+            "source":"overlays",
+            "layout":{
+                "visibility":"none"
+            },
+            "filter": ["all",
+                ["==", ["get", "date"], "30-09-2022"]
+            ],
+            "paint":{
+                "fill-color":
+                [
+					"case",
+					["==", ["get", "layer"], "ClaimedUkrainianCounteroffensives"],
+					"#f7cb56",
+                    ["==", ["get", "layer"], "UkraineControlMap"],
+					"#c70000",
+					"#ffffff"
+				],
+                "fill-opacity":
+                [
+					"case",
+					["==", ["get", "layer"], "ClaimedUkrainianCounteroffensives"],
+					0.8,
+					["==", ["get", "layer"], "UkraineControlMap"],
+					0.5,
+					0
+				]
+            }
+        },
+        {
+            "id":"bakhmut-white",
+            "type":"fill",
+            "source":"bakhmut",
+            "layout":{
+                "visibility":"visible"
+            },
+            "paint":{
+                "fill-color":"#ffffff",
+                "fill-opacity":0.3
+            }
+        },
+        {
+            "id":"bakhmut-dark",
+            "type":"fill",
+            "source":"bakhmut",
+            "layout":{
+                "visibility":"none"
+            },
+            "paint":{
+                "fill-color":"#333",
+                "fill-opacity":0.3
+            }
+        },
+        {
+            "id": "hills",
+            "type": "hillshade",
+            "source": "hillshadeSource",
+            "layout": {
+                "visibility": "visible"
+            },
+            "paint": {
+                "hillshade-shadow-color": "#000",
+                "hillshade-accent-color": "#FFF",
+                "hillshade-exaggeration": 1,
+                "hillshade-highlight-color": "#FFFFFF",
+                "hillshade-illumination-anchor": "viewport",
+                "hillshade-illumination-direction": 330
+            }
+        },
+        {
+            "id": "waterway_river",
+            "type": "line",
+            "source": "vector-tiles",
+            "source-layer": "waterway",
+            "layout": {
+                "line-cap": "round",
+                "visibility": "visible"
+            },
+            "paint": {
+                "line-color": "#00b2ff",
+                "line-width":1.5,
+                "line-opacity":0.5
+            },
+            "metadata": {},
+            "filter": ["all", ["==", "class", "river"],
+                ["!=", "brunnel", "tunnel"],
+                ["!=", "intermittent", 1]
+            ]
+        }
+        , {
+            "id": "water",
+            "type": "fill",
+            "source": "vector-tiles",
+            "source-layer": "water",
+            "layout": {
+                "visibility": "visible"
+            },
+            "paint": {
+                "fill-color": "#00b2ff",
+                "fill-opacity":0.3
+            },
+            "metadata": {},
+            "filter": ["all", ["!=", "intermittent", 1],
+                ["!=", "brunnel", "tunnel"]
+            ]
+        }, 
+        {
+            "id": "road_trunk_primary",
+            "type": "line",
+            "source": "vector-tiles",
+            "source-layer": "transportation",
+            "layout": {
+                "line-cap": "round",
+                "line-join": "round",
+                "visibility": "visible"
+            },
+            "paint": {
+                "line-color": "#FFFFFF",
+                "line-width": 2,
+                "line-opacity":0.3
+            },
+            "metadata": {},
+            "filter": [
+                "all",
+                [
+                    "!in",
+                    "brunnel",
+                    "bridge",
+                    "tunnel"
+                ],
+                [
+                    "!=",
+                    "ramp",
+                    1
+                ],
+                [
+                    "in",
+                    "class",
+                    "primary",
+                    "trunk"
+                ]
+            ]
+        }
+        , {
+            "id": "road_secondary_tertiary",
+            "type": "line",
+            "source": "vector-tiles",
+            "source-layer": "transportation",
+            "layout": {
+                "line-cap": "round",
+                "line-join": "round",
+                "visibility": "visible"
+            },
+            "paint": {
+                "line-color": "#ffffff",
+                "line-width": 1,
+                "line-opacity":0.3
+            },
+            "metadata": {},
+            "filter": ["all", ["!in", "brunnel", "bridge", "tunnel"],
+                ["in", "class", "secondary", "tertiary"]
+            ]
+        },
+          {
+            "id": "Populated place",
+            "type": "symbol",
+            "source": "labels",
+            "minzoom": 3,
+            "maxzoom": 22,
+            "filter": [
+                "==",
+                "featurecla",
+                "Populated place"
+            ],
+            "layout": {
+                "text-size": 16,
+                "text-font": [
+                    "Gdn Text Sans TS3Bold"
+                ],
+                "text-field": "{name}",
+                "text-justify": [
+                    "center"
+                ],
+                "text-variable-anchor": [
+                    "center"
+                ],
+                "text-radial-offset": 0.5,
+                "text-justify": "auto",
+                "visibility": "visible",
+                "icon-image": "Admin-1 capital",
+                "icon-size": 1,
+                "visibility": "visible"
+            },
+            "paint": {
+                "text-halo-color": "#FFFFFF",
+                "text-halo-width": 1,
+                "text-color": "#333333"
+            }
+        },
+        {
+            "id": "Area-control-label",
+            "type": "symbol",
+            "source": "labels",
+            "minzoom": 3,
+            "maxzoom": 22,
+            "filter": [
+                "==",
+                "featurecla",
+                "Point"
+            ],
+            "layout": {
+                "text-size": 16,
+                "text-font": [
+                    "Guardian Text Sans Bold Italic"
+                ],
+                "text-field": "{name}",
+                "text-justify": [
+                    "center"
+                ],
+                "text-variable-anchor": [
+                    "center"
+                ],
+                "text-radial-offset": 0.5,
+                "text-justify": "auto",
+                "visibility": "none"
+            },
+            "paint": {
+                "text-halo-color": "#FFFFFF",
+                "text-halo-width": 1,
+                "text-color":
+                [
+					"case",
+					["==", ["get", "name"], "Russian\nadvance"],
+					"#c70000",
+					["==", ["get", "name"], "Russian\ncontrol"],
+                    "#c70000",
+					["==", ["get", "name"], "Ukrainian\nadvance"],
+                    "#ff7f00",
+					"#000"
+				]
+            }
+        },
+        {
+            "id": "Road-label",
+            "type": "symbol",
+            "source": "labels",
+            "minzoom": 3,
+            "maxzoom": 22,
+            "filter": [
+                "==",
+                "featurecla",
+                "Road"
+            ],
+            "layout": {
+                "text-size": 16,
+                "text-font": [
+                    "Guardian Text Sans Bold Italic"
+                ],
+                "text-field": "{name}",
+                "text-justify": [
+                    "center"
+                ],
+                "text-variable-anchor": [
+                    "center"
+                ],
+                "text-radial-offset": 0.5,
+                "text-justify": "auto",
+                "visibility": "visible"
+            },
+            "paint": {
+                "text-halo-color": "#333",
+                "text-halo-width": 1,
+                "text-halo-blur": 0.5,
+                "text-color":"#fff"
+            }
+        },
+        {
+            "id": "River-label",
+            "type": "symbol",
+            "source": "labels",
+            "minzoom": 3,
+            "maxzoom": 22,
+            "filter": [
+                "==",
+                "featurecla",
+                "River"
+            ],
+            "layout": {
+                "text-size": 15,
+                "text-font": [
+                    "Gdn Text Sans TS3Regular It"
+                ],
+                "text-field": "{name}",
+                "text-justify": [
+                    "left"
+                ],
+                "text-variable-anchor": [
+                    "left"
+                ],
+                "text-radial-offset": 0.5,
+                "text-justify": "auto",
+                "visibility": "none"
+            },
+            "paint": {
+                "text-halo-color": "#333",
+                "text-halo-width": 1,
+                "text-halo-blur": 0.5,
+                "text-color":"#00b2ff"
+            }
+        },
+        {
+            "id": "Ridge-label",
+            "type": "symbol",
+            "source": "labels",
+            "minzoom": 3,
+            "maxzoom": 22,
+            "filter": [
+                "==",
+                "featurecla",
+                "Ridge"
+            ],
+            "layout": {
+                "text-size": 15,
+                "text-font": [
+                    "Gdn Text Sans TS3Regular It"
+                ],
+                "text-field": "{name}",
+                "text-justify": [
+                    "center"
+                ],
+                "text-variable-anchor": [
+                    "center"
+                ],
+                "text-radial-offset": 0.5,
+                "text-justify": "auto",
+                "visibility": "visible"
+            },
+            "paint": {
+                "text-halo-color": "#333",
+                "text-halo-width": 1,
+                "text-halo-blur": 0.5,
+                "text-color":"#ffffff"
+            }
+        }
+    ],
+    "terrain": {
+        "source": "terrainSource",
+        "exaggeration": 3
+    }
+}

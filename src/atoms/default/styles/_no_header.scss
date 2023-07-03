@@ -1,0 +1,46 @@
+//move the furniture off the page
+[data-gu-name="meta"],
+[data-gu-name="headline"],
+[data-gu-name="title"],
+[data-gu-name="standfirst"],
+[data-link-name="article section"],
+[data-cy="sub-nav"]{
+    position: absolute; top: -100vh;
+}
+
+[data-gu-name="lines"], .meta.keyline-4{
+    display: none;
+}
+
+[name="SubNav"]{
+    display: none;
+}
+
+[data-layout="InteractiveLayout"]{
+    margin-top: -2px;
+}
+
+section:first-of-type {
+    display: none;
+}
+
+.element.element-atom.element-immersive {
+    margin: 0;
+}
+
+#veggie-burger{
+    position: absolute;
+    z-index: 100000;
+}
+
+.content--interactive{
+    margin-top: 1px;
+}
+
+/*----- App fixes -----*/
+.ios, .android {
+
+    .article__body{padding: 0;}
+
+    .article__header{position: absolute; top: -100vh;}
+}
