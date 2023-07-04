@@ -15,9 +15,9 @@ import Locator from '$lib/helpers/Locator.js'
 import ScrollyTeller from "$lib/helpers/scrollyteller.js"
 import bakhmut from "$assets/bakhmut-shape.json"
 import doc from "$assets/doc.json"
-import * as Promise from "es6-promise"
+//import * as Promise from "es6-promise"
 
-console.log(Promise)
+//console.log(Promise)
 const dates = doc.chapters.map(d => {
 
 //Clean dates to be read as strings
@@ -44,9 +44,6 @@ const locatorWidth = isMobile ? 120 : 200;
 const locatorHeight = isMobile ? 120 : 200;
 
 let map;
-
-
-
 
 //------------------------HEADER----------------------------------------------
 
@@ -125,11 +122,11 @@ function rotateCamera() {
 
 const renderMap = async (webpEnabled) => {
 
-    const topoFile = await fetch('__assetsPath__/ukraine-merged-20230614.json')
-	const areas = await topoFile.json();
-    const data = feature(areas, areas.objects['ukraine-merged-20230614']);
+    // const topoFile = await fetch('__assetsPath__/ukraine-merged-20230614.json')
+	// const areas = await topoFile.json();
+    // const data = feature(areas, areas.objects['ukraine-merged-20230614']);
 
-	style.sources.overlays.data = data;
+	// style.sources.overlays.data = data;
 
     map = new mapGl({
         container: 'gv-wrapper',
@@ -152,21 +149,18 @@ const renderMap = async (webpEnabled) => {
         
         // map.on('moveend', function() {
 
-        //     console.log(reqAnimation)
+        //     console.log('moveend')
 
-        //     // locator.updateLocator(map.getBounds());
+        //     locator.updateLocator(map.getBounds());
 
-        //     // if(current == 0){
-
-        //     //     console.log('rotate camera')
-        //     //     rotateCamera()
-        //     // }
-        //     // else{
-        //     //     console.log('stop camera')
-        //     //     cancelAnimationFrame(reqAnimation);
-        //     //     rotation = 0;
+        //     if(current == 0){
+        //         rotateCamera()
+        //     }
+        //     else{
+        //         cancelAnimationFrame(reqAnimation);
+        //         rotation = 0;
                 
-        //     // }
+        //     }
         // });
 
         const zoomToBounds = (bounds, callback) => {
@@ -182,14 +176,16 @@ const renderMap = async (webpEnabled) => {
 
         
         scrolly.addTrigger({num: 1, do: () => {
-
+            //map.remove();
+            current = 0;
             map.fitBounds([[38.070910,48.557711],[37.953904,48.647324]]);
+            rotateCamera()
             document.querySelector('.header-wrapper').classList.remove('hide');
 
         }})
 
         scrolly.addTrigger({num: 2, do: () => {
-
+            current = 1;
             map.fitBounds([[37.4872599076183448,48.5499422913235676],[38.0593925657791559,48.8995789157551712]]);
             document.querySelector('.header-wrapper').classList.add('hide');
 

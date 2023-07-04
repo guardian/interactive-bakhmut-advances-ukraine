@@ -7,7 +7,9 @@ export async function render() {
 
 	const doc = await request({"uri":'https://interactive.guim.co.uk/docsdata-test/1Dabx4Lqs0ZgecD4Xo2TUib7G-N9XkuDEhBcaHkIDCaE.json', json:true});
 
-   	fs.writeFileSync(`src/assets/doc.json`, JSON.stringify(doc));
+   	//fs.writeFileSync(`src/assets/doc.json`, JSON.stringify(doc));
+
+    //console.log(doc)
 
     let html = ``
     doc.chapters.forEach(element => {
