@@ -106,6 +106,7 @@ const scrolly = new ScrollyTeller({
 
 let reqAnimation;
 let rotation = 0;
+let current = 0;
 
 function rotateCamera() {
     // clamp the rotation between 0 -360 degrees
@@ -133,7 +134,7 @@ const renderMap = async (webpEnabled) => {
         style: style,
         bounds: [[38.070910,48.557711],[37.953904,48.647324]],
         zoom: 11,
-        maxZoom: 11,
+        maxZoom: 12,
         minZoom:4,
         pitch: 45,
         interactive:false,
@@ -143,49 +144,32 @@ const renderMap = async (webpEnabled) => {
 	const locator = new Locator(locatorWidth, locatorHeight, ukraine, ukraine.objects.UKR_adm0, map.getBounds(), {x:width - locatorWidth - 10, y:0});
 	locator.addLocator(svg)
 
+    map.on('zoomend', () => {
+        if(current == 0){
+            rotation = 0
+            if(!isMobile)rotateCamera()
+        }
+        else{
+            if(!isMobile)cancelAnimationFrame(reqAnimation)
+        }
+    })
+
     map.on('load', () =>{
 
-        let current = 0;
+        if(!isMobile)rotateCamera()
         
-        // map.on('moveend', function() {
-
-        //     console.log('moveend')
-
-        //     locator.updateLocator(map.getBounds());
-
-        //     if(current == 0){
-        //         rotateCamera()
-        //     }
-        //     else{
-        //         cancelAnimationFrame(reqAnimation);
-        //         rotation = 0;
-                
-        //     }
-        // });
-
-        const zoomToBounds = (bounds, callback) => {
-
-            function resolve(){
-                 callback();
-            }
-
-            map.on("moveend", function () {setTimeout(function () {new Promise(resolve)}, 1000);});
-            map.fitBounds(bounds);
-            
-        }
-
         
         scrolly.addTrigger({num: 1, do: () => {
             //map.remove();
             current = 0;
             map.fitBounds([[38.070910,48.557711],[37.953904,48.647324]]);
-            rotateCamera()
             document.querySelector('.header-wrapper').classList.remove('hide');
 
         }})
 
         scrolly.addTrigger({num: 2, do: () => {
             current = 1;
+            cancelAnimationFrame(reqAnimation)
             map.fitBounds([[37.4872599076183448,48.5499422913235676],[38.0593925657791559,48.8995789157551712]]);
             document.querySelector('.header-wrapper').classList.add('hide');
 
