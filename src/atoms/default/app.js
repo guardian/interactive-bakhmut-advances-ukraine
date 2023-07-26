@@ -15,13 +15,9 @@ import Locator from '$lib/helpers/Locator.js'
 import ScrollyTeller from "$lib/helpers/scrollyteller.js"
 import bakhmut from "$assets/bakhmut-shape.json"
 import doc from "$assets/doc.json"
-//import * as Promise from "es6-promise"
-
-//console.log(Promise)
-const dates = doc.chapters.map(d => {
 
 //Clean dates to be read as strings
-
+const dates = doc.chapters.map(d => {
     if(d.date){
         let value
         d.date.indexOf('/') != -1 ? value = d.date : value = '-'
@@ -30,7 +26,7 @@ const dates = doc.chapters.map(d => {
 
 }).filter(d => d != undefined)
 
-//------------------------INITIALIZE MEASSURES--------------------------------
+//------------------------INITIALIZE MEASURES--------------------------------
 
 const isMobile = window.matchMedia('(max-width: 600px)').matches;
 const width = window.innerWidth;
@@ -64,9 +60,8 @@ if (window.location.protocol == 'https:' || window.location.protocol == 'http:')
 	details = document.querySelector('[data-gu-name="meta"]').innerText.split('\n');
 	social = document.querySelector('.meta__social').innerHTML;
 	document.querySelector('.header-wrapper__date').innerHTML = details[1];
-	
-
 }
+
 else {
 
 	headline = document.querySelector('.headline.selectable').innerHTML;
@@ -127,6 +122,7 @@ const renderMap = async (webpEnabled) => {
 	// const areas = await topoFile.json();
     // const data = feature(areas, areas.objects['ukraine-merged-20230614']);
 
+
 	// style.sources.overlays.data = data;
 
     map = new mapGl({
@@ -140,6 +136,13 @@ const renderMap = async (webpEnabled) => {
         interactive:false,
         //cooperativeGestures:true
     })
+
+    const widerAreaBounds = [[37.4872599076183448, 48.5499422913235676], [38.0593925657791559, 48.8995789157551712]]
+
+    const bakhmutBounds = [
+        [38.070910, 48.557711],
+        [37.953904, 48.647324]
+    ]
 
 	const locator = new Locator(locatorWidth, locatorHeight, ukraine, ukraine.objects.UKR_adm0, map.getBounds(), {x:width - locatorWidth - 10, y:0});
 	locator.addLocator(svg)
@@ -156,24 +159,58 @@ const renderMap = async (webpEnabled) => {
 
     map.on('load', () =>{
 
-        if(!isMobile)rotateCamera()
-        
+        if (!isMobile) rotateCamera()
         
         scrolly.addTrigger({num: 1, do: () => {
-            //map.remove();
             current = 0;
-            map.fitBounds([[38.070910,48.557711],[37.953904,48.647324]]);
-            document.querySelector('.header-wrapper').classList.remove('hide');
+            map.fitBounds(bakhmutBounds)
+            map.setLayoutProperty('Populated place', 'visibility', 'none')
+            document.querySelector('.header-wrapper').classList.remove('hide')
 
         }})
 
         scrolly.addTrigger({num: 2, do: () => {
             current = 1;
             cancelAnimationFrame(reqAnimation)
-            map.fitBounds([[37.4872599076183448,48.5499422913235676],[38.0593925657791559,48.8995789157551712]]);
+            map.fitBounds(widerAreaBounds)
+            map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk"], true, false]);
+            map.setLayoutProperty('Populated place', 'visibility', 'visible');
             document.querySelector('.header-wrapper').classList.add('hide');
 
         }})
+
+        scrolly.addTrigger({ num: 3, do: () => {
+            cancelAnimationFrame(reqAnimation)
+             map.fitBounds(bakhmutBounds);
+        }})
+
+        scrolly.addTrigger({
+            num: 4, do: () => {
+                cancelAnimationFrame(reqAnimation)
+                map.fitBounds(bakhmutBounds)
+            }
+        })
+
+        scrolly.addTrigger({
+            num: 5, do: () => {
+                cancelAnimationFrame(reqAnimation)
+                map.fitBounds(bakhmutBounds)
+                map.setLayoutProperty('Ridge-label', 'visibility', 'visible')
+                // map.setPaintProperty('satellite', 'raster-opacity', 1)
+                map.setLayoutProperty('satellite', 'visibility', 'visible')
+                // map.setPaintProperty('satellite', 'raster-opacity', 1)
+            }
+        })
+
+        scrolly.addTrigger({
+            num: 6, do: () => {
+                cancelAnimationFrame(reqAnimation)
+                console.log('666')
+                // map.setPaintProperty('satellite', 'raster-opacity', 0)
+                map.setLayoutProperty('satellite', 'visibility', 'none')
+                // map.setPaintProperty('satellite', 'raster-opacity', 0)
+            }
+        })
 
         
 

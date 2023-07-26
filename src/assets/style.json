@@ -9,7 +9,7 @@
             "format": "jpg",
             "tileSize": 256
         },
-        "terrainSource": {
+        "hillshadeSource": {
             "type": "raster-dem",
             "tiles": [
                 "https://interactive.guim.co.uk/maptiles/ukraine/bakhmut/terrain/{z}/{x}/{y}.png"
@@ -17,7 +17,7 @@
             "format": "png",
             "tileSize": 256
         },
-        "hillshadeSource": {
+        "terrainSource": {
             "type": "raster-dem",
             "tiles": [
                 "https://interactive.guim.co.uk/maptiles/ukraine/bakhmut/terrain/{z}/{x}/{y}.png"
@@ -66,8 +66,8 @@
             "paint": {
               "raster-opacity": 1,
               "raster-opacity-transition": {
-                "delay":0,
-                "duration": 100
+                "delay": 0,
+                "duration": 400
               }
               
             }
@@ -254,18 +254,14 @@
                     "Gdn Text Sans TS3Bold"
                 ],
                 "text-field": "{name}",
-                "text-justify": [
-                    "center"
-                ],
                 "text-variable-anchor": [
                     "center"
                 ],
                 "text-radial-offset": 0.5,
                 "text-justify": "auto",
-                "visibility": "visible",
+                "visibility": "none",
                 "icon-image": "Admin-1 capital",
-                "icon-size": 1,
-                "visibility": "visible"
+                "icon-size": 1
             },
             "paint": {
                 "text-halo-color": "#FFFFFF",
@@ -333,15 +329,12 @@
                     "Guardian Text Sans Bold Italic"
                 ],
                 "text-field": "{name}",
-                "text-justify": [
-                    "center"
-                ],
                 "text-variable-anchor": [
                     "center"
                 ],
                 "text-radial-offset": 0.5,
                 "text-justify": "auto",
-                "visibility": "visible"
+                "visibility": "none"
             },
             "paint": {
                 "text-halo-color": "#333",
@@ -401,15 +394,12 @@
                     "Gdn Text Sans TS3Regular It"
                 ],
                 "text-field": "{name}",
-                "text-justify": [
-                    "center"
-                ],
                 "text-variable-anchor": [
                     "center"
                 ],
                 "text-radial-offset": 0.5,
                 "text-justify": "auto",
-                "visibility": "visible"
+                "visibility": "none"
             },
             "paint": {
                 "text-halo-color": "#333",

@@ -38,7 +38,7 @@
   "dependencies": {
     "d3-geo": "^3.1.0",
     "d3-selection": "^3.0.0",
-    "maplibre-gl": "^3.1.0",
+    "maplibre-gl": "^3.2.1",
     "preact": "^10.12.1",
     "request-promise": "^4.2.6",
     "topojson-client": "^3.1.0"
