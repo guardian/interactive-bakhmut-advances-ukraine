@@ -25,7 +25,10 @@ $whiteDark: #f6f6f6;
 [data-gu-name="headline"], [data-gu-name="standfirst"], [data-gu-name="media"], [data-gu-name="meta"] {
   position: relative;
   z-index: 10;
-  margin-left: 80px;
+  
+  @include mq(desktop) {
+    margin-left: 80px;
+  }
 }
 
 [data-gu-name="border"] {
@@ -45,8 +48,19 @@ $whiteDark: #f6f6f6;
 }
 
 .content__headline {
-  margin-top: 160px;
   font-size: 36px !important;
+
+  @include mq(desktop) {
+    margin-top: 0;
+  }
+
+  @include mq(tablet) {
+
+  }
+
+  @include mq(leftCol) {
+    margin-top: 160px;
+  }
 }
 
 .content__standfirst {
@@ -89,11 +103,30 @@ label[for="dateToggle"] {
 }
 
 .content__labels {
+  @include mq(mobile) {
+    margin-top: 20px;
+  }
+
+  @include mq(tablet) {
+    margin-top: 56px;
+  }
+
+  @include mq(desktop) {
+    margin-left: 80px;
+    margin-top: 132px;
+  }
+
+  @include mq(leftCol) {
+    margin-left: 242px;
+    margin-top: 132px;
+  }
+
+  @include mq(wide) {
+    margin-left: 320px;
+    margin-top: 128px;
+  }
   position: relative;
   z-index: 10;
-  margin-left: 320px;
-  margin-top: 128px;
-  word-break: normal !important;
   width: 200px;
 }
 
