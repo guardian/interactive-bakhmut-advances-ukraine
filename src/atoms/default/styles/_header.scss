@@ -15,7 +15,6 @@ $whiteDark: #f6f6f6;
     height: 100%;
     opacity: var(--opacity, 1);
     transition: opacity 1s ease;
-    // width: 100vw;
     position: absolute;
     z-index: 9;
     left: -20%;
@@ -30,14 +29,10 @@ $whiteDark: #f6f6f6;
 }
 
 [data-gu-name="border"] {
-  // position: relative;
-  // z-index: 10;
   display: none;
 }
 
 [data-gu-name="lines"] {
-  // position: relative;
-  // z-index: 10;
   display: none;
 }
 
@@ -82,9 +77,26 @@ $whiteDark: #f6f6f6;
 }
 
 label[for="dateToggle"] {
-  color: #dcdcdc;
+  color: #dcdcdc !important;
 }
 
 .byline {
+  color: $redAccent !important;
+
+  a {
+    color: $redAccent !important;
+  }
+}
+
+.content__labels {
+  position: relative;
+  z-index: 10;
+  margin-left: 320px;
+  margin-top: 128px;
+  word-break: normal !important;
+  width: 200px;
+}
+
+.content__label__link {
   color: $redAccent !important;
 }
