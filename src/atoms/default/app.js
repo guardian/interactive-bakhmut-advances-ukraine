@@ -41,46 +41,6 @@ const locatorHeight = isMobile ? 120 : 200;
 
 let map;
 
-//------------------------HEADER----------------------------------------------
-
-// let header = document.querySelector('.header-wrapper')
-// let subjectLabels = null;
-// let headline = null;
-// let standfirst = null;
-// let byline = null;
-// let details = null;
-// let social = null;
-
-// if (window.location.protocol == 'https:' || window.location.protocol == 'http:') {
-
-// 	subjectLabels = document.querySelector('.content__labels ').innerHTML;
-// 	headline = document.querySelector('[data-gu-name="headline"] h1').innerHTML;
-// 	standfirst = document.querySelector('[data-gu-name="standfirst"] p').innerHTML;
-// 	byline = document.querySelector('[data-link-name="byline"] div');
-// 	details = document.querySelector('[data-gu-name="meta"]').innerText.split('\n');
-// 	social = document.querySelector('.meta__social').innerHTML;
-// 	document.querySelector('.header-wrapper__date').innerHTML = details[1];
-// }
-
-// else {
-
-// 	headline = document.querySelector('.headline.selectable').innerHTML;
-// 	standfirst = document.querySelector('.standfirst.selectable p').innerHTML;
-// 	byline = document.querySelector('.meta__byline');
-// 	details = document.querySelector('.meta__published__date');
-// 	document.querySelector('.header-wrapper__date').appendChild(details)
-
-// 	if(getMobileOperatingSystem() == 'Android'){
-// 		document.querySelector('.scroll-text__fixed').style.top = '56px';
-// 	}
-	
-// }
-
-// document.querySelector('.header-wrapper__byline').appendChild(byline);
-// document.querySelector('.header-wrapper__content__labels').innerHTML = subjectLabels
-// document.querySelector(".header-wrapper__content .content__headline").innerHTML = headline;
-// document.querySelector(".header-wrapper__content .scroll-text__fixed__header").innerHTML = standfirst;
-// document.querySelector('.header-wrapper__meta__social').innerHTML = social;
 
 //-------------------------feed map styles with extra data------------------------
 
@@ -117,6 +77,7 @@ function rotateCamera() {
 //-------------------------preload map--------------------------------------------
 
 const renderMap = async (webpEnabled) => {
+    console.log('running render map')
 
     // const topoFile = await fetch('__assetsPath__/ukraine-merged-20230614.json')
 	// const areas = await topoFile.json();
@@ -158,14 +119,16 @@ const renderMap = async (webpEnabled) => {
     })
 
     map.on('load', () =>{
+        console.log('map loaded')
 
         if (!isMobile) rotateCamera()
         
         scrolly.addTrigger({num: 1, do: () => {
+            console.log('0')
             current = 0;
             map.fitBounds(bakhmutBounds)
             map.setLayoutProperty('Populated place', 'visibility', 'none')
-            document.querySelectorAll('[data-gu-name="body"]')[0].style.setProperty("--opacity", 1);
+            document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--opacity", 1);
             document.querySelector('.locator-svg').style.opacity = 0;
             // document.querySelector('[data-gu-name="body"]');
             // document.querySelector('.header-wrapper').classList.remove('hide')
@@ -173,12 +136,13 @@ const renderMap = async (webpEnabled) => {
         }})
 
         scrolly.addTrigger({num: 2, do: () => {
+            console.log('1')
             current = 1;
             cancelAnimationFrame(reqAnimation)
             map.fitBounds(widerAreaBounds)
             map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk"], true, false]);
             map.setLayoutProperty('Populated place', 'visibility', 'visible');
-            document.querySelectorAll('[data-gu-name="body"]')[0].style.setProperty("--opacity", 0);
+            document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--opacity", 0);
             document.querySelector('.locator-svg').style.opacity = 1;
             // document.querySelector('.header-wrapper').classList.add('hide');
 
