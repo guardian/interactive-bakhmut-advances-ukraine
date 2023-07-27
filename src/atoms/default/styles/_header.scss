@@ -1,0 +1,30 @@
+[data-gu-name="body"] {
+  position: absolute;
+  top: -68px;
+  left: 0;
+  right: 0;
+
+  &:before {
+    display: block;
+    content: '';
+    top: 12px;
+    background: rgba(0,0,0,0.5);
+    height: 100%;
+    opacity: var(--opacity, 1);
+    transition: opacity 1s ease;
+    // width: 100vw;
+    position: absolute;
+    z-index: 9;
+    left: -20%;
+    right: -20%;
+  }
+}
+
+[data-gu-name="headline"], [data-gu-name="standfirst"], [data-gu-name="media"], [data-gu-name="lines"], [data-gu-name="meta"] {
+  position: relative;
+  z-index: 10;
+}
+
+.content__headline, .content__standfirst {
+  color: #efefec !important;
+}

@@ -35,19 +35,7 @@ export async function render() {
     <div class="scroll-wrapper">
 	    <div class="scroll-inner">
             <div id="gv-wrapper"></div>
-            <svg id="svg-wrapper" style="position:absolute; top:0px; z-index: 1; pointer-events:none"></svg>
-			<div class="header-wrapper">
-				<div class="header-background"></div>
-				<div class="header-wrapper__content">
-					<div class="loading-overlay__inner">Loading</div>
-					<div class="header-wrapper__content__labels"></div>
-					<h1 class="content__headline" id="content__headline"></h1>
-					<div class="scroll-text__fixed__header"></div>
-					<div class="header-wrapper__byline"></div>
-					<div class="header-wrapper__date"></div>
-					<div class="header-wrapper__meta__social"></div>
-				</div>
-			</div>
+            <svg id="svg-wrapper" class="locator-svg" style="position:absolute; top:0px; z-index: 1; pointer-events:none"></svg>
         </div>
         <div class="scroll-text">
             ${html}
