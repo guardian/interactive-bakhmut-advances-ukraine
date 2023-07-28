@@ -129,7 +129,8 @@ const renderMap = async (webpEnabled) => {
             map.fitBounds(bakhmutBounds)
             map.setLayoutProperty('Populated place', 'visibility', 'none')
             document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--opacity", 1);
-            document.querySelector('.locator-svg').style.opacity = 0;
+            document.querySelector('.article__body')?.style.setProperty("--opacity", 1)
+            document.querySelector('.locator-svg').style.opacity = 0
             // document.querySelector('[data-gu-name="body"]');
             // document.querySelector('.header-wrapper').classList.remove('hide')
 
@@ -142,7 +143,8 @@ const renderMap = async (webpEnabled) => {
             map.fitBounds(widerAreaBounds)
             map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk"], true, false]);
             map.setLayoutProperty('Populated place', 'visibility', 'visible');
-            document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--opacity", 0);
+            document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--opacity", 0)
+            document.querySelector('.article__body')?.style.setProperty("--opacity", 0)
             document.querySelector('.locator-svg').style.opacity = 1;
             // document.querySelector('.header-wrapper').classList.add('hide');
 

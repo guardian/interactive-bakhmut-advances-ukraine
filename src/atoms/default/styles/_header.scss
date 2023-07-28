@@ -17,8 +17,21 @@ $whiteDark: #f6f6f6;
     transition: opacity 1s ease;
     position: absolute;
     z-index: 9;
-    left: -20%;
-    right: -20%;
+    left: 50%;
+		right: 50%;
+    width: 100vw;
+    margin-left: -50vw;
+    margin-right: -50vw;
+
+    // @include mq(mobile) {
+    //   left: 0;
+    //   right: 0;
+    // }
+
+    // @include mq(tablet) {
+    //   // left: -20%;
+    //   // right: -20%;
+    // }
   }
 }
 
@@ -132,4 +145,126 @@ label[for="dateToggle"] {
 
 .content__label__link {
   color: $redAccent !important;
+}
+
+
+.ios, .android {
+  .article__body {
+    padding: 0 !important;
+    &:before {
+      display: block;
+      content: '';
+      top: 0px;
+      background: rgba(0,0,0,0.5);
+      height: 100%;
+      opacity: var(--opacity, 1);
+      transition: opacity 1s ease;
+      position: absolute;
+      z-index: 9;
+      left: 0;
+      right: 0;
+    }
+  }
+
+
+  .article__header {
+    margin-top: 44px !important;
+    position: absolute !important;
+    z-index: 10 !important;
+    background: none !important;
+
+    .headline {
+      font-size: 36px !important;
+      color: $whiteDark !important;
+      line-height: 41.4px !important;
+    }
+
+    .standfirst {
+      color: $whiteDark !important;
+      font-size: 18px !important;
+      font-weight: 400 !important;
+      line-height: 20px !important;
+    }
+
+    .byline__author {
+      font-weight: 700 !important;
+      font-size: 17px !important;
+    }
+
+    .meta__published__date {
+      color:#999999 !important;
+    }
+  }
+
+  .keyline-4:before {
+    display: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .ios, .android {
+    .article__body {
+      padding: 0 !important;
+      &:before {
+        display: block;
+        content: '';
+        top: 0px;
+        background: rgba(0,0,0,0.5);
+        height: 100%;
+        opacity: var(--opacity, 1);
+        transition: opacity 1s ease;
+        position: absolute;
+        z-index: 9;
+        left: 0;
+        right: 0;
+      }
+    }
+
+
+    .article__header {
+      margin-top: 44px !important;
+      position: absolute !important;
+      z-index: 10 !important;
+      background: none !important;
+
+      .headline {
+        font-size: 36px !important;
+        color: $whiteDark !important;
+        line-height: 41.4px !important;
+        background: none !important;
+      }
+
+      .article-kicker {
+        background: none !important;
+      }
+
+      .standfirst {
+        color: $whiteDark !important;
+        font-size: 18px !important;
+        font-weight: 400 !important;
+        line-height: 20px !important;
+        background: none !important;
+      }
+
+      .standfirst__inner {
+        background: none !important;
+      }
+
+      .byline__author {
+        font-weight: 700 !important;
+        font-size: 17px !important;
+      }
+
+      .meta__published__date {
+        color:#999999 !important;
+      }
+    }
+
+    .keyline-4:before {
+      display: none;
+    }
+    .keyline-4 {
+      background: none !important;
+    }
+  }
 }
