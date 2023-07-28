@@ -7,10 +7,6 @@ export async function render() {
 
 	const doc = await request({"uri":'https://interactive.guim.co.uk/docsdata-test/1Dabx4Lqs0ZgecD4Xo2TUib7G-N9XkuDEhBcaHkIDCaE.json', json:true});
 
-   	//fs.writeFileSync(`src/assets/doc.json`, JSON.stringify(doc));
-
-    //console.log(doc)
-
     let html = ``
     doc.chapters.forEach(element => {
 
@@ -19,7 +15,7 @@ export async function render() {
         {
             html += `<div class="scroll-text__inner">
                 <div class="scroll-text__div">
-                    <time>${element.date.indexOf('[') != -1 ? '' :  element.date}</time>
+                    <time>${element.date || ''}</time>
                     <h2>${element.headingText}</h2>
                     <p>${element.bodyText}</p>
                 </div>

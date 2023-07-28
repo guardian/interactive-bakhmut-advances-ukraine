@@ -1,30 +1,13 @@
 import './styles/main.scss';
 import { Map as mapGl } from 'maplibre-gl';
 import style from '$assets/style.json'
-
-// enable this when creating an atom for the article template
-// import '$lib/helpers/resizeFrame';
-
-// create scrollbar width CSS variable
 import '$lib/helpers/scrollbarWidth';
-
 import { feature } from 'topojson-client';
 import labels from '$assets/labels.json'
 import ukraine from '$assets/UKR_adm0.json'
 import Locator from '$lib/helpers/Locator.js'
 import ScrollyTeller from "$lib/helpers/scrollyteller.js"
 import bakhmut from "$assets/bakhmut-shape.json"
-import doc from "$assets/doc.json"
-
-//Clean dates to be read as strings
-const dates = doc.chapters.map(d => {
-    if(d.date){
-        let value
-        d.date.indexOf('/') != -1 ? value = d.date : value = '-'
-        return value
-    }
-
-}).filter(d => d != undefined)
 
 //------------------------INITIALIZE MEASURES--------------------------------
 
@@ -40,7 +23,6 @@ const locatorWidth = isMobile ? 120 : 200;
 const locatorHeight = isMobile ? 120 : 200;
 
 let map;
-
 
 //-------------------------feed map styles with extra data------------------------
 
@@ -79,12 +61,14 @@ function rotateCamera() {
 const renderMap = async (webpEnabled) => {
     console.log('running render map')
 
-    // const topoFile = await fetch('__assetsPath__/ukraine-merged-20230614.json')
-	// const areas = await topoFile.json();
-    // const data = feature(areas, areas.objects['ukraine-merged-20230614']);
+    const topoFile = await fetch('__assetsPath__/ukraine-merged-20230614.json')
+    const doc = await (await fetch('https://interactive.guim.co.uk/docsdata-test/1Dabx4Lqs0ZgecD4Xo2TUib7G-N9XkuDEhBcaHkIDCaE.json')).json()
+    console.log(doc)
 
+	const areas = await topoFile.json();
+    const data = feature(areas, areas.objects['ukraine-merged-20230614']);
 
-	// style.sources.overlays.data = data;
+	style.sources.overlays.data = data;
 
     map = new mapGl({
         container: 'gv-wrapper',
@@ -97,6 +81,11 @@ const renderMap = async (webpEnabled) => {
         interactive:false,
         //cooperativeGestures:true
     })
+
+    const renderOverlays = (date) => {
+        map.setLayoutProperty('overlays', 'visibility', 'visible');
+        map.setFilter('overlays', ["match", ['get', 'date'], date.replace(/\//g, '-'), true, false]);
+    }
 
     const widerAreaBounds = [[37.4872599076183448, 48.5499422913235676], [38.0593925657791559, 48.8995789157551712]]
 
@@ -123,65 +112,129 @@ const renderMap = async (webpEnabled) => {
 
         if (!isMobile) rotateCamera()
         
-        scrolly.addTrigger({num: 1, do: () => {
-            console.log('0')
+        scrolly.addTrigger({num: 0, do: (d) => {
             current = 0;
             map.fitBounds(bakhmutBounds)
             map.setLayoutProperty('Populated place', 'visibility', 'none')
+            map.setLayoutProperty('overlays', 'visibility', 'none');
             document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--opacity", 1);
             document.querySelector('.article__body')?.style.setProperty("--opacity", 1)
             document.querySelector('.locator-svg').style.opacity = 0
-            // document.querySelector('[data-gu-name="body"]');
-            // document.querySelector('.header-wrapper').classList.remove('hide')
-
         }})
 
-        scrolly.addTrigger({num: 2, do: () => {
-            console.log('1')
+        scrolly.addTrigger({num: 1, do: () => {
             current = 1;
             cancelAnimationFrame(reqAnimation)
             map.fitBounds(widerAreaBounds)
             map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk"], true, false]);
             map.setLayoutProperty('Populated place', 'visibility', 'visible');
+            map.setLayoutProperty('overlays', 'visibility', 'none');
             document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--opacity", 0)
             document.querySelector('.article__body')?.style.setProperty("--opacity", 0)
             document.querySelector('.locator-svg').style.opacity = 1;
-            // document.querySelector('.header-wrapper').classList.add('hide');
-
         }})
 
-        scrolly.addTrigger({ num: 3, do: () => {
+        scrolly.addTrigger({ num: 2, do: () => {
+            document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--opacity", 0)
+            document.querySelector('.article__body')?.style.setProperty("--opacity", 0)
             cancelAnimationFrame(reqAnimation)
-             map.fitBounds(bakhmutBounds);
+            map.fitBounds(bakhmutBounds)
+            map.setLayoutProperty('overlays', 'visibility', 'none');
         }})
+
+        scrolly.addTrigger({
+            num: 3, do: () => {
+                console.log('ads')
+                document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--opacity", 0)
+                document.querySelector('.article__body')?.style.setProperty("--opacity", 0)
+                cancelAnimationFrame(reqAnimation)
+                map.fitBounds(bakhmutBounds)
+                map.setLayoutProperty('Area-control-label', 'visibility', 'none');
+                map.setLayoutProperty('overlays', 'visibility', 'none');
+            }
+        })
 
         scrolly.addTrigger({
             num: 4, do: () => {
                 cancelAnimationFrame(reqAnimation)
                 map.fitBounds(bakhmutBounds)
+                map.setLayoutProperty('Ridge-label', 'visibility', 'visible')
+                map.setLayoutProperty('satellite', 'visibility', 'visible')
+                map.setLayoutProperty('bakhmut-dark', "visibility", "none")
+                map.setLayoutProperty('Area-control-label', 'visibility', 'none');
+                map.setFilter('Area-control-label', ["match", ['get', 'name'], ["Russian\ncontrol", "Ukrainian\nadvance"], false, false]);
+                map.setLayoutProperty('overlays', 'visibility', 'none');
             }
         })
 
         scrolly.addTrigger({
             num: 5, do: () => {
                 cancelAnimationFrame(reqAnimation)
-                map.fitBounds(bakhmutBounds)
-                map.setLayoutProperty('Ridge-label', 'visibility', 'visible')
-                // map.setPaintProperty('satellite', 'raster-opacity', 1)
-                map.setLayoutProperty('satellite', 'visibility', 'visible')
-                // map.setPaintProperty('satellite', 'raster-opacity', 1)
+                renderOverlays('30/01/2023')
+                map.setLayoutProperty('satellite', 'visibility', 'none')
+                map.setLayoutProperty('bakhmut-dark', "visibility", "visible")
+                map.setLayoutProperty('Area-control-label', 'visibility', 'visible');
+                map.setFilter('Area-control-label', ["match",['get', 'name'], ["Russian\ncontrol"], true, false]);
+
             }
         })
 
         scrolly.addTrigger({
             num: 6, do: () => {
                 cancelAnimationFrame(reqAnimation)
-                console.log('666')
-                // map.setPaintProperty('satellite', 'raster-opacity', 0)
+                renderOverlays('30/01/2023')
                 map.setLayoutProperty('satellite', 'visibility', 'none')
-                // map.setPaintProperty('satellite', 'raster-opacity', 0)
+                map.setLayoutProperty('bakhmut-dark', "visibility", "visible")
+                map.setLayoutProperty('Area-control-label', 'visibility', 'visible');
+                map.setFilter('Area-control-label', ["match", ['get', 'name'], ["Russian\ncontrol", "Ukrainian\nadvance"], true, false]);
+
             }
         })
+
+        scrolly.addTrigger({
+            num: 7, do: () => {
+                renderOverlays('21/05/2023')
+            }
+        })
+
+        scrolly.addTrigger({
+            num: 8, do: () => {
+                renderOverlays('30/05/2023')
+            }
+        })
+
+        scrolly.addTrigger({
+            num: 9, do: () => {
+                renderOverlays('06/06/2023')
+            }
+        })
+
+        scrolly.addTrigger({
+            num: 10, do: () => {
+                renderOverlays('06/06/2023')
+            }
+        })
+
+        scrolly.addTrigger({
+            num: 11, do: () => {
+                renderOverlays('27/06/2023')
+            }
+        })
+    })
+
+    scrolly.watchScroll();
+}
+
+renderMap()
+
+
+
+
+
+
+
+
+
 
         
 
@@ -205,14 +258,6 @@ const renderMap = async (webpEnabled) => {
     //           {
     //             current = i 
 
-    //             if(dates[i] != '-'){
-
-    //                 let date = dates[i].replace(/\//g, '-')
-
-    //                 map.setFilter('overlays', ["match",['get', 'date'], date, true, false]);
-    //                 //map.setFilter('russia-control', ["match",['get', 'date'], date, true, false]);
-
-    //             }
 
     //             if(i == 0 || i == 1){
 
@@ -284,14 +329,3 @@ const renderMap = async (webpEnabled) => {
     //           }
 
     //     })
-
-    scrolly.watchScroll();
-
-    })
-
-}
-
-renderMap()
-
-
-

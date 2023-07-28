@@ -76,7 +76,7 @@ class ScrollyTeller {
   }
 
   doScrollAction(i) {
-    const trigger = this.triggerPoints.find(d => d.num === i + 1);
+    const trigger = this.triggerPoints.find(d => d.num === i);
     if (trigger) {
       trigger.do();
     }
