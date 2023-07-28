@@ -150,7 +150,9 @@ const renderMap = async (webpEnabled) => {
                 cancelAnimationFrame(reqAnimation)
                 map.fitBounds(bakhmutBounds)
                 map.setLayoutProperty('Area-control-label', 'visibility', 'none');
-                map.setLayoutProperty('overlays', 'visibility', 'none');
+                map.setLayoutProperty('overlays', 'visibility', 'none')
+                map.setLayoutProperty('road_major_rail', 'visibility', 'none')
+                map.setLayoutProperty('road_major_rail_bg', 'visibility', 'none')
             }
         })
 
@@ -164,6 +166,8 @@ const renderMap = async (webpEnabled) => {
                 map.setLayoutProperty('Area-control-label', 'visibility', 'none');
                 map.setFilter('Area-control-label', ["match", ['get', 'name'], ["Russian\ncontrol", "Ukrainian\nadvance"], false, false]);
                 map.setLayoutProperty('overlays', 'visibility', 'none');
+                map.setLayoutProperty('road_major_rail', 'visibility', 'visible')
+                map.setLayoutProperty('road_major_rail_bg', 'visibility', 'visible')
             }
         })
 
