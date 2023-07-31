@@ -1,8 +1,8 @@
-import './styles/main.scss';
-import { Map as mapGl } from 'maplibre-gl';
+import './styles/main.scss'
+import { Map as mapGl } from 'maplibre-gl'
 import style from '$assets/style.json'
-import '$lib/helpers/scrollbarWidth';
-import { feature } from 'topojson-client';
+import '$lib/helpers/scrollbarWidth'
+import { feature } from 'topojson-client'
 import labels from '$assets/labels.json'
 import ukraine from '$assets/UKR_adm0.json'
 import Locator from '$lib/helpers/Locator.js'
@@ -11,23 +11,23 @@ import bakhmut from "$assets/bakhmut-shape.json"
 
 //------------------------INITIALIZE MEASURES--------------------------------
 
-const isMobile = window.matchMedia('(max-width: 600px)').matches;
-const width = window.innerWidth;
-const height = window.innerHeight;
+const isMobile = window.matchMedia('(max-width: 600px)').matches
+const width = window.innerWidth
+const height = window.innerHeight
 
-const svg = document.getElementById('svg-wrapper');
-svg.style.width = width + "px";
-svg.style.height = height + "px";
+const svg = document.getElementById('svg-wrapper')
+svg.style.width = width + "px"
+svg.style.height = height + "px"
 
-const locatorWidth = isMobile ? 120 : 200;
-const locatorHeight = isMobile ? 120 : 200;
+const locatorWidth = isMobile ? 120 : 200
+const locatorHeight = isMobile ? 120 : 200
 
-let map;
+let map
 
 //-------------------------feed map styles with extra data------------------------
 
-style.sources.labels.data = labels;
-style.sources.bakhmut.data = bakhmut;
+style.sources.labels.data = labels
+style.sources.bakhmut.data = bakhmut
 
 //-------------------------set up the scrolly-------------------------------------
 
@@ -41,17 +41,17 @@ const scrolly = new ScrollyTeller({
 //--------------------helpers-------------------------------
 //from https://maplibre.org/maplibre-gl-js-docs/example/animate-camera-around-point/
 
-let reqAnimation;
-let rotation = 0;
-let current = 0;
+let reqAnimation
+let rotation = 0
+let current = 0
 
 function rotateCamera() {
     // clamp the rotation between 0 -360 degrees
     // Divide timestamp by 100 to slow rotation to ~10 degrees / sec
-    map.rotateTo((rotation / 50) % 360, { duration: 0 });
+    map.rotateTo((rotation / 50) % 360, { duration: 0 })
     rotation++
     // Request the next frame of the reqAnimation.
-    reqAnimation = requestAnimationFrame(rotateCamera);
+    reqAnimation = requestAnimationFrame(rotateCamera)
 }
 
 
@@ -65,26 +65,26 @@ const renderMap = async (webpEnabled) => {
     const doc = await (await fetch('https://interactive.guim.co.uk/docsdata-test/1Dabx4Lqs0ZgecD4Xo2TUib7G-N9XkuDEhBcaHkIDCaE.json')).json()
     console.log(doc)
 
-	const areas = await topoFile.json();
-    const data = feature(areas, areas.objects['ukraine-merged-20230614']);
+	const areas = await topoFile.json()
+    const data = feature(areas, areas.objects['ukraine-merged-20230614'])
 
-	style.sources.overlays.data = data;
+	style.sources.overlays.data = data
 
     map = new mapGl({
         container: 'gv-wrapper',
         style: style,
         bounds: [[38.070910,48.557711],[37.953904,48.647324]],
         zoom: 11,
-        maxZoom: 12,
+        maxZoom: 16,
         minZoom:4,
         pitch: 45,
-        interactive:false,
+        interactive: false,
         //cooperativeGestures:true
     })
 
     const renderOverlays = (date) => {
-        map.setLayoutProperty('overlays', 'visibility', 'visible');
-        map.setFilter('overlays', ["match", ['get', 'date'], date.replace(/\//g, '-'), true, false]);
+        map.setLayoutProperty('overlays', 'visibility', 'visible')
+        map.setFilter('overlays', ["match", ['get', 'date'], date.replace(/\//g, '-'), true, false])
     }
 
     const widerAreaBounds = [[37.4872599076183448, 48.5499422913235676], [38.0593925657791559, 48.8995789157551712]]
@@ -94,7 +94,7 @@ const renderMap = async (webpEnabled) => {
         [37.953904, 48.647324]
     ]
 
-	const locator = new Locator(locatorWidth, locatorHeight, ukraine, ukraine.objects.UKR_adm0, map.getBounds(), {x:width - locatorWidth - 10, y:0});
+	const locator = new Locator(locatorWidth, locatorHeight, ukraine, ukraine.objects.UKR_adm0, map.getBounds(), {x:width - locatorWidth - 10, y:0})
 	locator.addLocator(svg)
 
     map.on('zoomend', () => {
@@ -113,46 +113,45 @@ const renderMap = async (webpEnabled) => {
         if (!isMobile) rotateCamera()
         
         scrolly.addTrigger({num: 0, do: (d) => {
-            current = 0;
+            current = 0
             map.fitBounds(bakhmutBounds)
             map.setLayoutProperty('Populated place', 'visibility', 'none')
-            map.setLayoutProperty('overlays', 'visibility', 'none');
-            document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--opacity", 1);
+            map.setLayoutProperty('overlays', 'visibility', 'none')
+            document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--opacity", 1)
             document.querySelector('.article__body')?.style.setProperty("--opacity", 1)
             document.querySelector('.locator-svg').style.opacity = 0
         }})
 
         scrolly.addTrigger({num: 1, do: () => {
-            current = 1;
+            current = 1
             cancelAnimationFrame(reqAnimation)
             map.fitBounds(widerAreaBounds)
-            map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk"], true, false]);
-            map.setLayoutProperty('Populated place', 'visibility', 'visible');
-            map.setLayoutProperty('overlays', 'visibility', 'none');
+            map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk"], true, false])
+            map.setLayoutProperty('Populated place', 'visibility', 'visible')
+            map.setLayoutProperty('overlays', 'visibility', 'none')
             document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--opacity", 0)
             document.querySelector('.article__body')?.style.setProperty("--opacity", 0)
-            document.querySelector('.locator-svg').style.opacity = 1;
+            document.querySelector('.locator-svg').style.opacity = 1
         }})
 
         scrolly.addTrigger({ num: 2, do: () => {
             document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--opacity", 0)
             document.querySelector('.article__body')?.style.setProperty("--opacity", 0)
             cancelAnimationFrame(reqAnimation)
-            map.fitBounds(bakhmutBounds)
-            map.setLayoutProperty('overlays', 'visibility', 'none');
+            map.fitBounds(widerAreaBounds)
+            map.setLayoutProperty('overlays', 'visibility', 'none')
+            map.setLayoutProperty('Road-label', 'visibility', 'none')
         }})
 
         scrolly.addTrigger({
             num: 3, do: () => {
-                console.log('ads')
                 document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--opacity", 0)
                 document.querySelector('.article__body')?.style.setProperty("--opacity", 0)
                 cancelAnimationFrame(reqAnimation)
                 map.fitBounds(bakhmutBounds)
-                map.setLayoutProperty('Area-control-label', 'visibility', 'none');
+                map.setLayoutProperty('Road-label', 'visibility', 'visible')
+                map.setLayoutProperty('Area-control-label', 'visibility', 'none')
                 map.setLayoutProperty('overlays', 'visibility', 'none')
-                map.setLayoutProperty('road_major_rail', 'visibility', 'none')
-                map.setLayoutProperty('road_major_rail_bg', 'visibility', 'none')
             }
         })
 
@@ -162,12 +161,16 @@ const renderMap = async (webpEnabled) => {
                 map.fitBounds(bakhmutBounds)
                 map.setLayoutProperty('Ridge-label', 'visibility', 'visible')
                 map.setLayoutProperty('satellite', 'visibility', 'visible')
+                map.setLayoutProperty('bakhmut-white', "visibility", "visible")
                 map.setLayoutProperty('bakhmut-dark', "visibility", "none")
-                map.setLayoutProperty('Area-control-label', 'visibility', 'none');
-                map.setFilter('Area-control-label', ["match", ['get', 'name'], ["Russian\ncontrol", "Ukrainian\nadvance"], false, false]);
-                map.setLayoutProperty('overlays', 'visibility', 'none');
-                map.setLayoutProperty('road_major_rail', 'visibility', 'visible')
-                map.setLayoutProperty('road_major_rail_bg', 'visibility', 'visible')
+                map.setLayoutProperty('road_trunk_primary_white', 'visibility', 'visible')
+                map.setLayoutProperty('road_secondary_tertiary_white', 'visibility', 'visible')
+                map.setLayoutProperty('road_trunk_primary_dark', 'visibility', 'none')
+                map.setLayoutProperty('road_secondary_tertiary_dark', 'visibility', 'none')
+                map.setLayoutProperty('Area-control-label', 'visibility', 'none')
+                map.setFilter('Area-control-label', ["match", ['get', 'name'], ["Russian\ncontrol", "Ukrainian\nadvance"], false, false])
+                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk"], true, false])
+                map.setLayoutProperty('overlays', 'visibility', 'none')
             }
         })
 
@@ -176,9 +179,15 @@ const renderMap = async (webpEnabled) => {
                 cancelAnimationFrame(reqAnimation)
                 renderOverlays('30/01/2023')
                 map.setLayoutProperty('satellite', 'visibility', 'none')
+                map.setLayoutProperty('bakhmut-white', "visibility", "none")
                 map.setLayoutProperty('bakhmut-dark', "visibility", "visible")
-                map.setLayoutProperty('Area-control-label', 'visibility', 'visible');
-                map.setFilter('Area-control-label', ["match",['get', 'name'], ["Russian\ncontrol"], true, false]);
+                map.setLayoutProperty('road_trunk_primary_white', 'visibility', 'none')
+                map.setLayoutProperty('road_secondary_tertiary_white', 'visibility', 'none')
+                map.setLayoutProperty('road_trunk_primary_dark', 'visibility', 'visible')
+                map.setLayoutProperty('road_secondary_tertiary_dark', 'visibility', 'visible')
+                map.setLayoutProperty('Area-control-label', 'visibility', 'visible')
+                map.setFilter('Area-control-label', ["match",['get', 'name'], ["Russian\ncontrol"], true, false])
+                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk", "Soledar", "Berkhivka"], true, false])
 
             }
         })
@@ -189,9 +198,13 @@ const renderMap = async (webpEnabled) => {
                 renderOverlays('30/01/2023')
                 map.setLayoutProperty('satellite', 'visibility', 'none')
                 map.setLayoutProperty('bakhmut-dark', "visibility", "visible")
-                map.setLayoutProperty('Area-control-label', 'visibility', 'visible');
-                map.setFilter('Area-control-label', ["match", ['get', 'name'], ["Russian\ncontrol", "Ukrainian\nadvance"], true, false]);
-
+                map.setLayoutProperty('road_trunk_primary_white', 'visibility', 'none')
+                map.setLayoutProperty('road_secondary_tertiary_white', 'visibility', 'none')
+                map.setLayoutProperty('road_trunk_primary_dark', 'visibility', 'visible')
+                map.setLayoutProperty('road_secondary_tertiary_dark', 'visibility', 'visible')
+                map.setLayoutProperty('Area-control-label', 'visibility', 'visible')
+                map.setFilter('Area-control-label', ["match", ['get', 'name'], ["Russian\ncontrol", "Ukrainian\nadvance"], true, false])
+                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk", "Soledar", "Berkhivka"], true, false])
             }
         })
 
@@ -226,7 +239,7 @@ const renderMap = async (webpEnabled) => {
         })
     })
 
-    scrolly.watchScroll();
+    scrolly.watchScroll()
 }
 
 renderMap()

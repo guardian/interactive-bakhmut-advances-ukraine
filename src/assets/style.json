@@ -124,7 +124,7 @@
             },
             "paint":{
                 "fill-color":"#333",
-                "fill-opacity":0.3
+                "fill-opacity": 0.3
             }
         },
         {
@@ -181,7 +181,7 @@
             ]
         }, 
         {
-            "id": "road_trunk_primary",
+            "id": "road_trunk_primary_white",
             "type": "line",
             "source": "vector-tiles",
             "source-layer": "transportation",
@@ -192,7 +192,7 @@
             },
             "paint": {
                 "line-color": "#FFFFFF",
-                "line-width": 2,
+                "line-width": 3,
                 "line-opacity":0.3
             },
             "metadata": {},
@@ -216,9 +216,46 @@
                     "trunk"
                 ]
             ]
-        }
-        , {
-            "id": "road_secondary_tertiary",
+        },
+        {
+            "id": "road_trunk_primary_dark",
+            "type": "line",
+            "source": "vector-tiles",
+            "source-layer": "transportation",
+            "layout": {
+                "line-cap": "round",
+                "line-join": "round",
+                "visibility": "none"
+            },
+            "paint": {
+                "line-color": "#333",
+                "line-width": 3,
+                "line-opacity": 0.3
+            },
+            "metadata": {},
+            "filter": [
+                "all",
+                [
+                    "!in",
+                    "brunnel",
+                    "bridge",
+                    "tunnel"
+                ],
+                [
+                    "!=",
+                    "ramp",
+                    1
+                ],
+                [
+                    "in",
+                    "class",
+                    "primary",
+                    "trunk"
+                ]
+            ]
+        },
+        {
+            "id": "road_secondary_tertiary_white",
             "type": "line",
             "source": "vector-tiles",
             "source-layer": "transportation",
@@ -235,6 +272,38 @@
             "metadata": {},
             "filter": ["all", ["!in", "brunnel", "bridge", "tunnel"],
                 ["in", "class", "secondary", "tertiary"]
+            ]
+        },
+        {
+            "id": "road_secondary_tertiary_dark",
+            "type": "line",
+            "source": "vector-tiles",
+            "source-layer": "transportation",
+            "layout": {
+                "line-cap": "round",
+                "line-join": "round",
+                "visibility": "none"
+            },
+            "paint": {
+                "line-color": "#333",
+                "line-width": 1,
+                "line-opacity": 0.3
+            },
+            "metadata": {},
+            "filter": [
+                "all",
+                [
+                    "!in",
+                    "brunnel",
+                    "bridge",
+                    "tunnel"
+                ],
+                [
+                    "in",
+                    "class",
+                    "secondary",
+                    "tertiary"
+                ]
             ]
         },
           {
