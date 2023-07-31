@@ -38,6 +38,7 @@
     position: absolute;
     top: 0;
     pointer-events: none;
+    width: 100%;
 }
 
 .scroll-text__div {
@@ -46,11 +47,11 @@
     max-width: 420px;
     //margin-left: 20px;
     background-color: #fff;
-    padding: 6px 10px 0px;
+    padding: 8px 12px 8px 12px;
     @include fs-headline(5);
     font-size: 20px;
     line-height: 26px;
-    padding: 16px;
+    border: 1px solid #333;
 
     span {
         display: inline-block;
@@ -62,11 +63,28 @@
         font-size: 16px;
     }
 
-    time{
+    time {
         font-family: "Guardian Text Sans Web", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
         font-size: 14px;
         font-weight: bold;
     }
+
+    h2 {
+        margin-bottom: 8px;
+    }
+
+    @include mq(mobile) {
+        width: calc(100% - 10px);
+    }
+
+    @include mq(mobileLandscape) {
+        width: calc(100% - 20px);
+    }
+
+    @include mq($until: desktop) {
+        margin: 0 auto;
+    }
+
 }
 
 .scroll-text__inner {
@@ -84,6 +102,17 @@
         .transparent-until-active & {
             opacity: 1;
         }
+    }
+
+    @include mq(tablet) {
+    }
+
+    @include mq(desktop) {
+        padding-left: 40px;
+    }
+
+    @include mq(wide) {
+        padding-left: 160px;
     }
 }
 
