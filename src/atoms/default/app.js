@@ -98,6 +98,17 @@ const renderMap = async (webpEnabled) => {
 	locator.addLocator(svg)
 
     map.on('zoomend', () => {
+        // console.log(map.getZoom(), 'zoom')
+        // console.log(map.getBounds(), 'bounds')
+        // console.log(map.getCenter(), 'center')
+        // console.log(map.getBearing(), 'bearing')
+        // console.log(map.getPitch(), 'pitch')
+
+
+        // map.flyTo({ center: { lng: 38.01284542392864, lat: 48.59740813939732 }, bearing: -87.81693712944023, pitch: 60, duration: 1000, zoom: 13.071195853786996 })
+        //fly to to set the pitcha nd bearing with the bounds
+
+
         if(current == 0){
             rotation = 0
             if(!isMobile)rotateCamera()
@@ -141,6 +152,7 @@ const renderMap = async (webpEnabled) => {
             map.fitBounds(widerAreaBounds)
             map.setLayoutProperty('overlays', 'visibility', 'none')
             map.setLayoutProperty('Road-label', 'visibility', 'none')
+            map.setLayoutProperty('Ridge-label', 'visibility', 'none')
         }})
 
         scrolly.addTrigger({
@@ -148,17 +160,18 @@ const renderMap = async (webpEnabled) => {
                 document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--opacity", 0)
                 document.querySelector('.article__body')?.style.setProperty("--opacity", 0)
                 cancelAnimationFrame(reqAnimation)
-                map.fitBounds(bakhmutBounds)
                 map.setLayoutProperty('Road-label', 'visibility', 'visible')
                 map.setLayoutProperty('Area-control-label', 'visibility', 'none')
                 map.setLayoutProperty('overlays', 'visibility', 'none')
+                map.setLayoutProperty('Ridge-label', 'visibility', 'none')
+                // map.fitBounds(bakhmutBounds)
+                map.flyTo({ center: { lng: 38.01284542392864, lat: 48.59740813939732 }, bearing: -87.81693712944023, pitch: 60, duration: 1000, zoom: 13.071195853786996 })
             }
         })
 
         scrolly.addTrigger({
             num: 4, do: () => {
                 cancelAnimationFrame(reqAnimation)
-                map.fitBounds(bakhmutBounds)
                 map.setLayoutProperty('Ridge-label', 'visibility', 'visible')
                 map.setLayoutProperty('satellite', 'visibility', 'visible')
                 map.setLayoutProperty('bakhmut-white', "visibility", "visible")
@@ -171,12 +184,15 @@ const renderMap = async (webpEnabled) => {
                 map.setFilter('Area-control-label', ["match", ['get', 'name'], ["Russian\ncontrol", "Ukrainian\nadvance"], false, false])
                 map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk"], true, false])
                 map.setLayoutProperty('overlays', 'visibility', 'none')
+                // map.fitBounds(bakhmutBounds)
+                map.flyTo({ center: { lng: 38.01284542392864, lat: 48.59740813939732 }, bearing: -87.81693712944023, pitch: 60, duration: 1000, zoom: 13.071195853786996 })
             }
         })
 
         scrolly.addTrigger({
             num: 5, do: () => {
                 cancelAnimationFrame(reqAnimation)
+                map.fitBounds(bakhmutBounds)
                 renderOverlays('30/01/2023')
                 map.setLayoutProperty('satellite', 'visibility', 'none')
                 map.setLayoutProperty('bakhmut-white', "visibility", "none")
