@@ -52,7 +52,7 @@
             "id": "background",
             "type": "background",
             "paint": {
-                "background-color": "#ffffff"
+                "background-color": "#dcdcdc"
             }
         },
         {
@@ -336,7 +336,7 @@
                 "Populated place"
             ],
             "layout": {
-                "text-size": 16,
+                "text-size": 17,
                 "text-font": [
                     "Gdn Text Sans TS3Bold"
                 ],
@@ -351,9 +351,9 @@
                 "icon-size": 1
             },
             "paint": {
-                "text-halo-color": "#FFFFFF",
+                "text-halo-color": "#333",
                 "text-halo-width": 1,
-                "text-color": "#333333"
+                "text-color": "#fff"
             }
         },
         {
@@ -393,7 +393,7 @@
 					"#c70000",
 					["==", ["get", "name"], "Russian\ncontrol"],
                     "#c70000",
-					["==", ["get", "name"], "Ukrainian\nadvance"],
+					["==", ["get", "name"], "Ukrainian\ncounteroffensive"],
                     "#ff7f00",
 					"#000"
 				]
@@ -476,7 +476,7 @@
                 "Ridge"
             ],
             "layout": {
-                "text-size": 15,
+                "text-size": 16,
                 "text-font": [
                     "Gdn Text Sans TS3Regular It"
                 ],

@@ -125,6 +125,7 @@ const renderMap = async (webpEnabled) => {
             document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--opacity", 1)
             document.querySelector('.article__body')?.style.setProperty("--opacity", 1)
             document.querySelector('.locator-svg').style.opacity = 0
+            document.querySelector('.maplibregl-ctrl.maplibregl-ctrl-group').style.opacity = 0
         }})
 
         scrolly.addTrigger({num: 1, do: () => {
@@ -137,6 +138,7 @@ const renderMap = async (webpEnabled) => {
             document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--opacity", 0)
             document.querySelector('.article__body')?.style.setProperty("--opacity", 0)
             document.querySelector('.locator-svg').style.opacity = 1
+            document.querySelector('.maplibregl-ctrl.maplibregl-ctrl-group').style.opacity = 1
         }})
 
         scrolly.addTrigger({ num: 2, do: () => {
@@ -175,10 +177,13 @@ const renderMap = async (webpEnabled) => {
                 map.setLayoutProperty('road_trunk_primary_dark', 'visibility', 'none')
                 map.setLayoutProperty('road_secondary_tertiary_dark', 'visibility', 'none')
                 map.setLayoutProperty('Area-control-label', 'visibility', 'none')
-                map.setFilter('Area-control-label', ["match", ['get', 'name'], ["Russian\ncontrol", "Ukrainian\nadvance"], false, false])
+                map.setFilter('Area-control-label', ["match", ['get', 'name'], ["Russian\ncontrol", "Ukrainian\ncounteroffensive"], false, false])
                 map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk"], true, false])
                 map.setLayoutProperty('overlays', 'visibility', 'none')
-                // map.fitBounds(bakhmutBounds)
+                map.setPaintProperty('Populated place', 'text-color', '#fff')
+                map.setPaintProperty('Populated place', 'text-halo-color', '#333')
+                map.setPaintProperty('Ridge-label', 'text-color', '#fff')
+                map.setPaintProperty('Ridge-label', 'text-halo-color', '#333')
                 map.flyTo({ center: { lng: 38.01284542392864, lat: 48.59740813939732 }, bearing: -87.81693712944023, pitch: 60, duration: 1000, zoom: 13.071195853786996 })
             }
         })
@@ -198,7 +203,10 @@ const renderMap = async (webpEnabled) => {
                 map.setLayoutProperty('Area-control-label', 'visibility', 'visible')
                 map.setFilter('Area-control-label', ["match",['get', 'name'], ["Russian\ncontrol"], true, false])
                 map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk", "Soledar", "Berkhivka"], true, false])
-
+                map.setPaintProperty('Populated place', 'text-color', '#333')
+                map.setPaintProperty('Populated place', 'text-halo-color', '#fff')
+                map.setPaintProperty('Ridge-label', 'text-color', '#333')
+                map.setPaintProperty('Ridge-label', 'text-halo-color', '#fff')
             }
         })
 
@@ -212,8 +220,8 @@ const renderMap = async (webpEnabled) => {
                 map.setLayoutProperty('road_secondary_tertiary_white', 'visibility', 'none')
                 map.setLayoutProperty('road_trunk_primary_dark', 'visibility', 'visible')
                 map.setLayoutProperty('road_secondary_tertiary_dark', 'visibility', 'visible')
-                map.setLayoutProperty('Area-control-label', 'visibility', 'visible')
-                map.setFilter('Area-control-label', ["match", ['get', 'name'], ["Russian\ncontrol", "Ukrainian\nadvance"], true, false])
+                map.setLayoutProperty('Area-control-label', 'visibility', 'visible')                
+                map.setFilter('Area-control-label', ["match", ['get', 'name'], ["Russian\ncontrol"], true, false])
                 map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk", "Soledar", "Berkhivka"], true, false])
             }
         })
@@ -221,6 +229,7 @@ const renderMap = async (webpEnabled) => {
         scrolly.addTrigger({
             num: 7, do: () => {
                 renderOverlays('21/05/2023')
+                map.setFilter('Area-control-label', ["match", ['get', 'name'], ["Russian\ncontrol", "Ukrainian\ncounteroffensive"], true, false])
             }
         })
 
