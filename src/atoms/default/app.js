@@ -61,7 +61,7 @@ function rotateCamera() {
 
 const renderMap = async (webpEnabled) => {
     const topoFile = await fetch('__assetsPath__/ukraine_layers_parsed.json')
-    const doc = await (await fetch('https://interactive.guim.co.uk/docsdata-test/1Dabx4Lqs0ZgecD4Xo2TUib7G-N9XkuDEhBcaHkIDCaE.json')).json()
+    // const doc = await (await fetch('https://interactive.guim.co.uk/docsdata-test/1Dabx4Lqs0ZgecD4Xo2TUib7G-N9XkuDEhBcaHkIDCaE.json')).json()
 	const areas = await topoFile.json()
     const data = feature(areas, areas.objects['ukraine_layers_parsed'])
 

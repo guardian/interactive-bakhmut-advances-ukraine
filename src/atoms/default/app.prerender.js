@@ -16,7 +16,7 @@ export async function render() {
         {
             html += `<div class="scroll-text__inner">
                 <div class="scroll-text__div">
-                    <time>${element.date ? date : ''}</time>
+                    <time>${element.date && element.chapter !== '6' ? date : ''}</time>
                     ${element.headingText && `<h2>${element.headingText}</h2>`}
                     <p>${element.bodyText}</p>
                 </div>
