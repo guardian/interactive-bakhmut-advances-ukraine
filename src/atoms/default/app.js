@@ -1,5 +1,5 @@
 import './styles/main.scss'
-import { Map as mapGl } from 'maplibre-gl'
+import { NavigationControl, Map as mapGl } from 'maplibre-gl'
 import style from '$assets/style.json'
 import '$lib/helpers/scrollbarWidth'
 import { feature } from 'topojson-client'
@@ -8,6 +8,7 @@ import ukraine from '$assets/UKR_adm0.json'
 import Locator from '$lib/helpers/Locator.js'
 import ScrollyTeller from "$lib/helpers/scrollyteller.js"
 import bakhmut from "$assets/bakhmut-shape.json"
+import 'maplibre-gl/dist/maplibre-gl.css';
 
 //------------------------INITIALIZE MEASURES--------------------------------
 
@@ -59,14 +60,10 @@ function rotateCamera() {
 //-------------------------preload map--------------------------------------------
 
 const renderMap = async (webpEnabled) => {
-    console.log('running render map')
-
-    const topoFile = await fetch('__assetsPath__/ukraine-merged-20230614.json')
+    const topoFile = await fetch('__assetsPath__/ukraine_layers_parsed.json')
     const doc = await (await fetch('https://interactive.guim.co.uk/docsdata-test/1Dabx4Lqs0ZgecD4Xo2TUib7G-N9XkuDEhBcaHkIDCaE.json')).json()
-    console.log(doc)
-
 	const areas = await topoFile.json()
-    const data = feature(areas, areas.objects['ukraine-merged-20230614'])
+    const data = feature(areas, areas.objects['ukraine_layers_parsed'])
 
 	style.sources.overlays.data = data
 
@@ -78,9 +75,11 @@ const renderMap = async (webpEnabled) => {
         maxZoom: 16,
         minZoom:4,
         pitch: 45,
+        maxPitch: 85,
         interactive: false,
-        //cooperativeGestures:true
     })
+    let nav = new NavigationControl({ showCompass: true, showZoom: false, visualizePitch: true })
+    map.addControl(nav, 'top-left')
 
     const renderOverlays = (date) => {
         map.setLayoutProperty('overlays', 'visibility', 'visible')
@@ -103,11 +102,6 @@ const renderMap = async (webpEnabled) => {
         // console.log(map.getCenter(), 'center')
         // console.log(map.getBearing(), 'bearing')
         // console.log(map.getPitch(), 'pitch')
-
-
-        // map.flyTo({ center: { lng: 38.01284542392864, lat: 48.59740813939732 }, bearing: -87.81693712944023, pitch: 60, duration: 1000, zoom: 13.071195853786996 })
-        //fly to to set the pitcha nd bearing with the bounds
-
 
         if(current == 0){
             rotation = 0

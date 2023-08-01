@@ -10,7 +10,7 @@ export async function render() {
     doc.chapters.forEach(element => {
 
         const dateArr = element.date.split('/')
-        const date = `${dateArr[0]} ${months[parseInt(dateArr[1])]} ${dateArr[2]}`
+        const date = `${dateArr[0]} ${months[parseInt(dateArr[1]) -1]} ${dateArr[2]}`
 
         if(element.chapter)
         {

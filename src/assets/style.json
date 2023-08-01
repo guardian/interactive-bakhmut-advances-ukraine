@@ -90,6 +90,15 @@
 					"#f7cb56",
                     ["==", ["get", "layer"], "UkraineControlMap"],
 					"#c70000",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "layer"
+                        ],
+                        "AssessedRussianAdvancesinUkraine"
+                    ],
+                    "#c70000",
 					"#ffffff"
 				],
                 "fill-opacity":
@@ -99,6 +108,15 @@
 					0.8,
 					["==", ["get", "layer"], "UkraineControlMap"],
 					0.5,
+                    [
+                        "==",
+                        [
+                            "get",
+                            "layer"
+                        ],
+                        "AssessedRussianAdvancesinUkraine"
+                    ],
+                    0.5,
 					0
 				]
             }

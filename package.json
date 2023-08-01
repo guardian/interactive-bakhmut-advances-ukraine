@@ -12,7 +12,8 @@
     "deploy:live": "node scripts/deploy.js --live",
     "deploylog:preview": "node scripts/deploylog.js --preview",
     "deploylog:live": "node scripts/deploylog.js",
-    "start": "vite"
+    "start": "vite",
+    "parseGeo": "node scripts/parseGeo.js"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.5.0",
