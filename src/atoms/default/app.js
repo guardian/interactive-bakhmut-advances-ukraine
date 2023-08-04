@@ -276,7 +276,7 @@ const renderMap = async (webpEnabled) => {
 
         scrolly.addTrigger({
             num: 11, do: () => {
-                renderOverlays('27/06/2023')
+                renderOverlays('03/08/2023')
             }
         })
     })
