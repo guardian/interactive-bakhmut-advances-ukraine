@@ -77,7 +77,7 @@ const renderMap = async (webpEnabled) => {
         minZoom:4,
         pitch: 45,
         maxPitch: 85,
-        interactive: true,
+        interactive: false,
     })
     let nav = new NavigationControl({ showCompass: true, showZoom: false, visualizePitch: true })
     map.addControl(nav, 'top-left')
@@ -250,7 +250,7 @@ const renderMap = async (webpEnabled) => {
                 map.setLayoutProperty('road_secondary_tertiary_dark', 'visibility', 'visible')
                 map.setLayoutProperty('Area-control-label', 'visibility', 'visible')                
                 map.setFilter('Area-control-label', ["match", ['get', 'name'], ["Russian\ncontrol"], true, false])
-                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk", "Soledar", "Berkhivka","Andriivka"], true, false])
+                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk", "Soledar", "Berkhivka", "Andriivka"], true, false])
             }
         })
 

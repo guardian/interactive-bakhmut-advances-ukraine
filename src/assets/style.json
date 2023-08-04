@@ -447,9 +447,6 @@
                     "Gdn Text Sans TS3Regular It"
                 ],
                 "text-field": "{name}",
-                "text-justify": [
-                    "left"
-                ],
                 "text-variable-anchor": [
                     "left"
                 ],
