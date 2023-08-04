@@ -77,7 +77,7 @@ const renderMap = async (webpEnabled) => {
         minZoom:4,
         pitch: 45,
         maxPitch: 85,
-        interactive: false,
+        interactive: true,
     })
     let nav = new NavigationControl({ showCompass: true, showZoom: false, visualizePitch: true })
     map.addControl(nav, 'top-left')
@@ -92,6 +92,11 @@ const renderMap = async (webpEnabled) => {
     const bakhmutBounds = [
         [38.070910, 48.557711],
         [37.953904, 48.647324]
+    ]
+
+    const bakhmutAndSouthBounds = [
+        [38.070910, 48.490000],
+        [37.898447460053035,48.647324]
     ]
 
 	const locator = new Locator(locatorWidth, locatorHeight, ukraine, ukraine.objects.UKR_adm0, map.getBounds(), {x:width - locatorWidth - 10, y:0})
@@ -245,7 +250,7 @@ const renderMap = async (webpEnabled) => {
                 map.setLayoutProperty('road_secondary_tertiary_dark', 'visibility', 'visible')
                 map.setLayoutProperty('Area-control-label', 'visibility', 'visible')                
                 map.setFilter('Area-control-label', ["match", ['get', 'name'], ["Russian\ncontrol"], true, false])
-                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk", "Soledar", "Berkhivka"], true, false])
+                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk", "Soledar", "Berkhivka","Andriivka"], true, false])
             }
         })
 
@@ -277,6 +282,8 @@ const renderMap = async (webpEnabled) => {
         scrolly.addTrigger({
             num: 11, do: () => {
                 renderOverlays('27/06/2023')
+                map.fitBounds(bakhmutAndSouthBounds)
+
             }
         })
     })
