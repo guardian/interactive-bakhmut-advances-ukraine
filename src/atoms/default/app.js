@@ -9,6 +9,7 @@ import Locator from '$lib/helpers/Locator.js'
 import ScrollyTeller from "$lib/helpers/scrollyteller.js"
 import bakhmut from "$assets/bakhmut-shape.json"
 import 'maplibre-gl/dist/maplibre-gl.css';
+// import { tileUrls } from '$assets/preloadedTiles.js'
 
 //------------------------INITIALIZE MEASURES--------------------------------
 
@@ -111,6 +112,28 @@ const renderMap = async (webpEnabled) => {
             if(!isMobile)cancelAnimationFrame(reqAnimation)
         }
     })
+
+    // function preloadTile(url) {
+    //     return new Promise((resolve, reject) => {
+    //         const img = new Image();
+    //         img.onload = () => resolve(url); // Resolve the promise when the tile is loaded
+    //         img.onerror = () => reject(new Error(`Failed to load tile: ${url}`));
+    //         img.src = url;
+    //     });
+    // }
+
+    // // Map the array of URLs to an array of promises that preload the tiles
+    // const preloadPromises = tileUrls.map(preloadTile);
+
+    // // Use Promise.all to wait for all the tiles to be preloaded
+    // Promise.all(preloadPromises)
+    //     .then((preloadedTiles) => {
+    //         console.log('All tiles have been preloaded');
+    //         // Now you can use the preloaded tiles as needed
+    //     })
+    //     .catch((error) => {
+    //         console.error('Error preloading tiles:', error);
+    //     });
 
     map.on('load', () =>{
         console.log('map loaded')
