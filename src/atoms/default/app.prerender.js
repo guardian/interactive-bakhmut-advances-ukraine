@@ -35,6 +35,13 @@ export async function render() {
 
     return `<link href='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css' rel='stylesheet' />
     <div id="scrolly-1">
+    <div class='gv-load gv-load-prompt'>
+        Loading...
+        <img class='gv-scrollarrow' src='__assetsPath__/downarrow.svg' />
+    </div>
+    <div class='gv-load gv-loader-wrapper'>
+        <div class='gv-loader'></div>
+    </div>
     <div class="scroll-wrapper">
 	    <div class="scroll-inner">
             <div id="gv-wrapper"></div>

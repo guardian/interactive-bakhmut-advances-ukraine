@@ -103,12 +103,6 @@ const renderMap = async (webpEnabled) => {
 	locator.addLocator(svg)
 
     map.on('zoomend', () => {
-        // console.log(map.getZoom(), 'zoom')
-        // console.log(map.getBounds(), 'bounds')
-        // console.log(map.getCenter(), 'center')
-        // console.log(map.getBearing(), 'bearing')
-        // console.log(map.getPitch(), 'pitch')
-
         if(current == 0){
             rotation = 0
             if(!isMobile)rotateCamera()
@@ -140,10 +134,28 @@ const renderMap = async (webpEnabled) => {
     //         console.error('Error preloading tiles:', error);
     //     });
 
-    map.on('load', () =>{
-        console.log('map loaded')
+    const numSources = 7.4
+    let loadedSources = 0
+    
+    let totalData = 0
 
-        // if (!isMobile) rotateCamera()
+    const loader = document.querySelector('.gv-loader')
+
+    map.on('data', (e) => {
+        if (e.dataType === 'source' && e.sourceDataType === 'metadata') {
+            loadedSources++;
+            const percentageLoaded = (loadedSources / numSources) * 100;
+            loader.style.width = `${percentageLoaded}%`;
+        }
+    })
+
+    map.on('load', () =>{
+        loader.style.width = '100%'
+        document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--imgOpacity", 0)
+        // document.querySelectorAll('.gv-load').forEach(el => el.style.opacity = 0)
+
+
+        if (!isMobile) rotateCamera()
         
         scrolly.addTrigger({num: 0, do: (d) => {
             current = 0
