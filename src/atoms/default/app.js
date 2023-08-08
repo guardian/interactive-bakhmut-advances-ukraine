@@ -143,7 +143,7 @@ const renderMap = async (webpEnabled) => {
     map.on('load', () =>{
         console.log('map loaded')
 
-        if (!isMobile) rotateCamera()
+        // if (!isMobile) rotateCamera()
         
         scrolly.addTrigger({num: 0, do: (d) => {
             current = 0

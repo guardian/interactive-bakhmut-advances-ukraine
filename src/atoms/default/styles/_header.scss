@@ -7,7 +7,7 @@ $whiteDark: #f6f6f6;
   left: 0;
   right: 0;
 
-  &:before {
+  &:after {
     display: block;
     content: '';
     top: 13px;
@@ -22,16 +22,25 @@ $whiteDark: #f6f6f6;
     width: 100vw;
     margin-left: -50vw;
     margin-right: -50vw;
-
-    // @include mq(mobile) {
-    //   left: 0;
-    //   right: 0;
-    // }
-
-    // @include mq(tablet) {
-    //   // left: -20%;
-    //   // right: -20%;
-    // }
+  }
+  &:before {
+    display: block;
+    content: '';
+    top: 13px;
+    background-image: url('https://media.guim.co.uk/1fa5a8feda97ab18364493348627f3712d99505d/0_0_3360_1828/2000.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    opacity: 1;
+    // transition: opacity 1s ease;
+    position: absolute;
+    z-index: 9;
+    left: 50%;
+    right: 50%;
+    width: 100vw;
+    margin-left: -50vw;
+    margin-right: -50vw;
   }
 }
 
