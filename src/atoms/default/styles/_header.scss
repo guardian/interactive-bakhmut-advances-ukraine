@@ -25,22 +25,28 @@ $whiteDark: #f6f6f6;
   }
   
   &:before {
-    display: block;
-    content: '';
-    top: 13px;
-    background-image: url('https://media.guim.co.uk/1fa5a8feda97ab18364493348627f3712d99505d/0_0_3360_1828/2000.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 100vh;
-    opacity: var(--imgOpacity, 1);
-    position: absolute;
-    z-index: 9;
-    left: 50%;
-    right: 50%;
-    width: 100vw;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    @include mq(mobile) {
+      background-image: url('https://media.guim.co.uk/b9ba68b5c7d9d352ecf6242191b176b1a40363ac/0_0_780_1388/562.jpg');
+      display: block;
+      content: '';
+      top: 13px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      opacity: var(--imgOpacity, 1);
+      position: absolute;
+      z-index: 9;
+      left: 50%;
+      right: 50%;
+      width: 100vw;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
+
+    @include mq(desktop) {
+      background-image: url('https://media.guim.co.uk/1fa5a8feda97ab18364493348627f3712d99505d/0_0_3360_1828/2000.jpg');
+      background-position: center;
+      height: 100vh;
+    }
   }
 }
 
