@@ -146,6 +146,8 @@ const renderMap = async (webpEnabled) => {
     const locator = $('.locator-svg')
     const compass = $('.maplibregl-ctrl.maplibregl-ctrl-group')
     const scrollArrow = $('.gv-scrollarrow')
+    const iosBody = $('.ios')
+    const androidBody = $('.android')
 
     map.on('data', (e) => {
         if (e.dataType === 'source' && e.sourceDataType === 'metadata') {
@@ -160,6 +162,8 @@ const renderMap = async (webpEnabled) => {
         bodyDesktop?.style.setProperty("--imgOpacity", 0)
         $$('.gv-load').forEach(el => el.style.opacity = 0)
         $('body').style['overflow-y'] = 'visible'
+        if (iosBody) iosBody.style.position = 'static'
+        if (androidBody) androidBody.style.position = 'static'
         scrollArrow.style.transition = 'opacity 0.5s ease-in-out'
         scrollArrow.style.opacity = 1
 
