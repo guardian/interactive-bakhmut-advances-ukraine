@@ -390,11 +390,11 @@
                 [
 					"case",
 					["==", ["get", "name"], "Russian\nadvance"],
-					"#c70000",
+					"#880105",
 					["==", ["get", "name"], "Russian\ncontrol"],
-                    "#c70000",
+                    "#880105",
 					["==", ["get", "name"], "Ukrainian\ncounteroffensive"],
-                    "#ff7f00",
+                    "#e05e00",
 					"#000"
 				]
             }

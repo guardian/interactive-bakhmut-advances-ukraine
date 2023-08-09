@@ -89,8 +89,12 @@ const renderMap = async (webpEnabled) => {
     }
 
     const widerAreaBounds = [[37.4872599076183448, 48.5499422913235676], [38.0593925657791559, 48.8995789157551712]]
-    const widerAreaOpts = isMobile ? { padding: { top: 0, bottom: 0, right: 20, left: 10, pitch: 20 }} : null
+    const widerAreaOpts = isMobile ? { padding: { top: 0, bottom: 0, right: 20, left: 10, pitch: 20, duration: 1000 } } : { duration: 1000 }
+    const bakhmutOpts = isMobile ? { padding: { top: 0, bottom: 0, right: 70, left: 40, duration: 1000 } } : { duration: 1000 }
     const bakhmutCloseUp = isMobile ? { center: { lng: 38.01284542392864, lat: 48.59740813939732 }, bearing: -45.81693712944023, pitch: 60, duration: 1000, zoom: 11.0 } : { center: { lng: 38.01284542392864, lat: 48.59740813939732 }, bearing: -82.81693712944023, pitch: 60, duration: 1000, zoom: 13.071195853786996 }
+
+    const bakhmutBwOpts = isMobile ? { padding: { top: 0, bottom: 0, right: 62, left: 100 }, duration: 1000, pitch: 35 } : bakhmutOpts
+    
 
 
     const bakhmutBounds = [
@@ -106,15 +110,15 @@ const renderMap = async (webpEnabled) => {
     const locatorMap = new LocatorComp(locatorWidth, locatorHeight, ukraine, ukraine.objects.UKR_adm0, map.getBounds(), {x:width - locatorWidth - 10, y:0})
     locatorMap.addLocator(svg)
 
-    map.on('zoomend', () => {
-        if(current == 0){
-            rotation = 0
-            if(!isMobile)rotateCamera()
-        }
-        else{
-            if(!isMobile)cancelAnimationFrame(reqAnimation)
-        }
-    })
+    // map.on('zoomend', () => {
+    //     if(current == 0){
+    //         rotation = 0
+    //         if(!isMobile)rotateCamera()
+    //     }
+    //     else{
+    //         if(!isMobile)cancelAnimationFrame(reqAnimation)
+    //     }
+    // })
 
     // function preloadTile(url) {
     //     return new Promise((resolve, reject) => {
@@ -171,6 +175,7 @@ const renderMap = async (webpEnabled) => {
         scrollArrow.style.opacity = 1
         // map.setFog(null)
 
+        isMobile && map.setLayoutProperty('Ridge-label', 'text-size', 15)
 
         if (!isMobile) rotateCamera()
         
@@ -203,7 +208,7 @@ const renderMap = async (webpEnabled) => {
         scrolly.addTrigger({ num: 2, do: () => {
             bodyDesktop?.style.setProperty("--opacity", 0)
             body?.style.setProperty("--opacity", 0)
-            cancelAnimationFrame(reqAnimation)
+            // cancelAnimationFrame(reqAnimation)
             map.fitBounds(widerAreaBounds, widerAreaOpts)
             map.setLayoutProperty('overlays', 'visibility', 'none')
             map.setLayoutProperty('Road-label', 'visibility', 'none')
@@ -214,7 +219,7 @@ const renderMap = async (webpEnabled) => {
             num: 3, do: () => {
                 bodyDesktop?.style.setProperty("--opacity", 0)
                 body?.style.setProperty("--opacity", 0)
-                cancelAnimationFrame(reqAnimation)
+                // cancelAnimationFrame(reqAnimation)
                 map.setLayoutProperty('Road-label', 'visibility', 'visible')
                 map.setLayoutProperty('Area-control-label', 'visibility', 'none')
                 map.setLayoutProperty('overlays', 'visibility', 'none')
@@ -227,7 +232,7 @@ const renderMap = async (webpEnabled) => {
 
         scrolly.addTrigger({
             num: 4, do: () => {
-                cancelAnimationFrame(reqAnimation)
+                // cancelAnimationFrame(reqAnimation)
                 map.setLayoutProperty('Ridge-label', 'visibility', 'visible')
                 map.setLayoutProperty('satellite', 'visibility', 'visible')
                 map.setLayoutProperty('bakhmut-white', "visibility", "visible")
@@ -250,8 +255,8 @@ const renderMap = async (webpEnabled) => {
 
         scrolly.addTrigger({
             num: 5, do: () => {
-                cancelAnimationFrame(reqAnimation)
-                map.fitBounds(bakhmutBounds)
+                // cancelAnimationFrame(reqAnimation)
+                map.fitBounds(bakhmutBounds, bakhmutBwOpts)
                 renderOverlays('30/01/2023')
                 map.setLayoutProperty('satellite', 'visibility', 'none')
                 map.setLayoutProperty('bakhmut-white', "visibility", "none")
@@ -272,7 +277,7 @@ const renderMap = async (webpEnabled) => {
 
         scrolly.addTrigger({
             num: 6, do: () => {
-                cancelAnimationFrame(reqAnimation)
+                // cancelAnimationFrame(reqAnimation)
                 renderOverlays('30/01/2023')
                 map.setLayoutProperty('satellite', 'visibility', 'none')
                 map.setLayoutProperty('bakhmut-dark', "visibility", "visible")
@@ -282,7 +287,7 @@ const renderMap = async (webpEnabled) => {
                 map.setLayoutProperty('road_secondary_tertiary_dark', 'visibility', 'visible')
                 map.setLayoutProperty('Area-control-label', 'visibility', 'visible')                
                 map.setFilter('Area-control-label', ["match", ['get', 'name'], ["Russian\ncontrol"], true, false])
-                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk", "Soledar", "Berkhivka", "Andriivka"], true, false])
+                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk", "Soledar", "Berkhivka"], true, false])
             }
         })
 
@@ -307,13 +312,16 @@ const renderMap = async (webpEnabled) => {
 
         scrolly.addTrigger({
             num: 10, do: () => {
+                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk", "Soledar", "Berkhivka"], true, false])
+                map.fitBounds(bakhmutBounds, bakhmutBwOpts)
                 renderOverlays('06/06/2023')
             }
         })
 
         scrolly.addTrigger({
             num: 11, do: () => {
-                map.fitBounds(bakhmutAndSouthBounds)
+                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk", "Soledar", "Berkhivka", "Andriivka"], true, false])
+                map.fitBounds(bakhmutAndSouthBounds, { duration: 1000, pitch: 45 })
                 renderOverlays('03/08/2023')
             }
         })
