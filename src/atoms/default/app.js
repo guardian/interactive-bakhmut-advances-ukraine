@@ -156,6 +156,16 @@ const renderMap = async (webpEnabled) => {
     const iosBody = $('.ios')
     const androidBody = $('.android')
 
+    const meta = $('[data-gu-name="meta"]')
+    const standfirst = $('[data-gu-name="standfirst"]')
+    const headline = $('[data-gu-name="headline"]')
+    const tags = $('.content__labels')
+
+    const metaApp = $('.meta__misc')
+    const headlineApp = $('.headline')
+    const standfirstApp = $('.standfirst')
+    
+
     map.on('data', (e) => {
         if (e.dataType === 'source' && e.sourceDataType === 'metadata') {
             loadedSources++;
@@ -189,6 +199,16 @@ const renderMap = async (webpEnabled) => {
             body?.style.setProperty("--opacity", 1)
             locator.style.opacity = 0
             compass.style.opacity = 0
+            if (headline) {
+                headline.style.opacity = 1
+                standfirst.style.opacity = 1
+                meta.style.opacity = 1
+                tags.style.opacity = 1
+            } else {
+                metaApp.style.opacity = 1
+                headlineApp.style.opacity = 1
+                standfirstApp.style.opacity = 1
+            }
         }})
 
         scrolly.addTrigger({num: 1, do: () => {
@@ -203,6 +223,16 @@ const renderMap = async (webpEnabled) => {
             body?.style.setProperty("--opacity", 0)
             locator.style.opacity = 1
             compass.style.opacity = 1
+            if (headline) {
+                headline.style.opacity = 0
+                standfirst.style.opacity = 0
+                meta.style.opacity = 0
+                tags.style.opacity = 0
+            } else {
+                metaApp.style.opacity = 0
+                headlineApp.style.opacity = 0
+                standfirstApp.style.opacity = 0
+            }
         }})
 
         scrolly.addTrigger({ num: 2, do: () => {

@@ -47,6 +47,8 @@ $whiteDark: #f6f6f6;
 [data-gu-name="headline"], [data-gu-name="standfirst"], [data-gu-name="media"], [data-gu-name="meta"] {
   position: relative;
   z-index: 10;
+  will-change: opacity;
+  transition: opacity 0.5s ease;
   
   @include mq(desktop) {
     margin-left: 80px;
@@ -125,6 +127,8 @@ label[for="dateToggle"] {
 }
 
 .content__labels {
+  will-change: opacity;
+  transition: opacity 0.5s ease;
   @include mq(mobile) {
     margin-top: 0px;
   }
@@ -243,6 +247,11 @@ body {
 
 .ios, .android {
   position: fixed;
+
+  .headline, .standfirst, .meta__misc {
+    will-change: opacity;
+    transition: opacity 0.5s ease;
+  }
 
   .article__body {
     padding: 0 !important;
