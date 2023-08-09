@@ -159,6 +159,7 @@ const renderMap = async (webpEnabled) => {
         loader.style.width = '100%'
         bodyDesktop?.style.setProperty("--imgOpacity", 0)
         $$('.gv-load').forEach(el => el.style.opacity = 0)
+        $('body').style['overflow-y'] = 'visible'
         scrollArrow.style.transition = 'opacity 0.5s ease-in-out'
         scrollArrow.style.opacity = 1
 
