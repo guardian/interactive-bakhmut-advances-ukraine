@@ -5,7 +5,8 @@ import '$lib/helpers/scrollbarWidth'
 import { feature } from 'topojson-client'
 import labels from '$assets/labels.json'
 import ukraine from '$assets/UKR_adm0.json'
-import Locator from '$lib/helpers/Locator.js'
+import LocatorComp from '$lib/helpers/Locator.js'
+import { $, $$ } from '$lib/helpers/util.js'
 import ScrollyTeller from "$lib/helpers/scrollyteller.js"
 import bakhmut from "$assets/bakhmut-shape.json"
 import 'maplibre-gl/dist/maplibre-gl.css';
@@ -34,7 +35,7 @@ style.sources.bakhmut.data = bakhmut
 //-------------------------set up the scrolly-------------------------------------
 
 const scrolly = new ScrollyTeller({
-	parent:  document.querySelector("#scrolly-1"),
+	parent:  $("#scrolly-1"),
 	triggerTop: 0.75, // percentage from the top of the screen that the trigger should fire
 	triggerTopMobile: 0.75,
 	transparentUntilActive: true
@@ -99,8 +100,8 @@ const renderMap = async (webpEnabled) => {
         [37.898447460053035,48.647324]
     ]
 
-	const locator = new Locator(locatorWidth, locatorHeight, ukraine, ukraine.objects.UKR_adm0, map.getBounds(), {x:width - locatorWidth - 10, y:0})
-	locator.addLocator(svg)
+    const locatorMap = new LocatorComp(locatorWidth, locatorHeight, ukraine, ukraine.objects.UKR_adm0, map.getBounds(), {x:width - locatorWidth - 10, y:0})
+    locatorMap.addLocator(svg)
 
     map.on('zoomend', () => {
         if(current == 0){
@@ -139,7 +140,12 @@ const renderMap = async (webpEnabled) => {
     
     let totalData = 0
 
-    const loader = document.querySelector('.gv-loader')
+    const loader = $('.gv-loader')
+    const body = $('.article__body')
+    const bodyDesktop = $$('[data-gu-name="body"]')[0]
+    const locator = $('.locator-svg')
+    const compass = $('.maplibregl-ctrl.maplibregl-ctrl-group')
+    const scrollArrow = $('.gv-scrollarrow')
 
     map.on('data', (e) => {
         if (e.dataType === 'source' && e.sourceDataType === 'metadata') {
@@ -151,39 +157,43 @@ const renderMap = async (webpEnabled) => {
 
     map.on('load', () =>{
         loader.style.width = '100%'
-        document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--imgOpacity", 0)
-        // document.querySelectorAll('.gv-load').forEach(el => el.style.opacity = 0)
+        bodyDesktop?.style.setProperty("--imgOpacity", 0)
+        $$('.gv-load').forEach(el => el.style.opacity = 0)
+        scrollArrow.style.transition = 'opacity 0.5s ease-in-out'
+        scrollArrow.style.opacity = 1
 
 
         if (!isMobile) rotateCamera()
         
         scrolly.addTrigger({num: 0, do: (d) => {
+            scrollArrow.style.opacity = 1
             current = 0
             map.fitBounds(bakhmutBounds)
             map.setLayoutProperty('Populated place', 'visibility', 'none')
             map.setLayoutProperty('overlays', 'visibility', 'none')
-            document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--opacity", 1)
-            document.querySelector('.article__body')?.style.setProperty("--opacity", 1)
-            document.querySelector('.locator-svg').style.opacity = 0
-            document.querySelector('.maplibregl-ctrl.maplibregl-ctrl-group').style.opacity = 0
+            bodyDesktop?.style.setProperty("--opacity", 1)
+            body?.style.setProperty("--opacity", 1)
+            locator.style.opacity = 0
+            compass.style.opacity = 0
         }})
 
         scrolly.addTrigger({num: 1, do: () => {
+            scrollArrow.style.opacity = 0
             current = 1
             cancelAnimationFrame(reqAnimation)
             map.fitBounds(widerAreaBounds)
             map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk"], true, false])
             map.setLayoutProperty('Populated place', 'visibility', 'visible')
             map.setLayoutProperty('overlays', 'visibility', 'none')
-            document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--opacity", 0)
-            document.querySelector('.article__body')?.style.setProperty("--opacity", 0)
-            document.querySelector('.locator-svg').style.opacity = 1
-            document.querySelector('.maplibregl-ctrl.maplibregl-ctrl-group').style.opacity = 1
+            bodyDesktop?.style.setProperty("--opacity", 0)
+            body?.style.setProperty("--opacity", 0)
+            locator.style.opacity = 1
+            compass.style.opacity = 1
         }})
 
         scrolly.addTrigger({ num: 2, do: () => {
-            document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--opacity", 0)
-            document.querySelector('.article__body')?.style.setProperty("--opacity", 0)
+            bodyDesktop?.style.setProperty("--opacity", 0)
+            body?.style.setProperty("--opacity", 0)
             cancelAnimationFrame(reqAnimation)
             map.fitBounds(widerAreaBounds)
             map.setLayoutProperty('overlays', 'visibility', 'none')
@@ -193,8 +203,8 @@ const renderMap = async (webpEnabled) => {
 
         scrolly.addTrigger({
             num: 3, do: () => {
-                document.querySelectorAll('[data-gu-name="body"]')[0]?.style.setProperty("--opacity", 0)
-                document.querySelector('.article__body')?.style.setProperty("--opacity", 0)
+                bodyDesktop?.style.setProperty("--opacity", 0)
+                body?.style.setProperty("--opacity", 0)
                 cancelAnimationFrame(reqAnimation)
                 map.setLayoutProperty('Road-label', 'visibility', 'visible')
                 map.setLayoutProperty('Area-control-label', 'visibility', 'none')

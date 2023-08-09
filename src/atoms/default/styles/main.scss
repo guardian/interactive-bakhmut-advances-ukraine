@@ -101,12 +101,25 @@
 }
 
 .gv-scrollarrow {
-    border: 1px solid #b3b3b3;
-    border-radius: 51000px;
-    width: 40px;
-    height: 40px;
-    padding: 5px 8px 0px 8px;
-    animation: down 1.5s infinite;
+    width: 100%;
+    position: fixed;
+    z-index: 9990;
+    bottom: 24px;
+    left: 0;
+    text-align: center;
+    opacity: 0;
+    will-change: opacity;
+    img {
+        z-index: 9999;
+        position: relative;
+        border: 1px solid #b3b3b3;
+        border-radius: 51000px;
+        width: 40px;
+        height: 40px;
+        padding: 5px 8px 0px 8px;
+        animation: down 1.5s infinite;
+        opacity: 1;
+    }
 }
 
 @keyframes down {
