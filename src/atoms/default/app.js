@@ -14,7 +14,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 
 //------------------------INITIALIZE MEASURES--------------------------------
 
-const isMobile = window.matchMedia('(max-width: 600px)').matches
+const isMobile = window.matchMedia('(max-width: 980px)').matches && window.innerWidth < window.innerHeight
 const width = window.innerWidth
 const height = window.innerHeight
 
@@ -22,8 +22,8 @@ const svg = document.getElementById('svg-wrapper')
 svg.style.width = width + "px"
 svg.style.height = height + "px"
 
-const locatorWidth = isMobile ? 120 : 200
-const locatorHeight = isMobile ? 120 : 200
+const locatorWidth = isMobile ? 120 : 150
+const locatorHeight = isMobile ? 120 : 150
 
 let map
 
@@ -89,6 +89,9 @@ const renderMap = async (webpEnabled) => {
     }
 
     const widerAreaBounds = [[37.4872599076183448, 48.5499422913235676], [38.0593925657791559, 48.8995789157551712]]
+    const widerAreaOpts = isMobile ? { padding: { top: 0, bottom: 0, right: 20, left: 10, pitch: 20 }} : null
+    const bakhmutCloseUp = isMobile ? { center: { lng: 38.01284542392864, lat: 48.59740813939732 }, bearing: -45.81693712944023, pitch: 60, duration: 1000, zoom: 11.0 } : { center: { lng: 38.01284542392864, lat: 48.59740813939732 }, bearing: -82.81693712944023, pitch: 60, duration: 1000, zoom: 13.071195853786996 }
+
 
     const bakhmutBounds = [
         [38.070910, 48.557711],
@@ -166,6 +169,7 @@ const renderMap = async (webpEnabled) => {
         if (androidBody) androidBody.style.position = 'static'
         scrollArrow.style.transition = 'opacity 0.5s ease-in-out'
         scrollArrow.style.opacity = 1
+        // map.setFog(null)
 
 
         if (!isMobile) rotateCamera()
@@ -186,7 +190,7 @@ const renderMap = async (webpEnabled) => {
             scrollArrow.style.opacity = 0
             current = 1
             cancelAnimationFrame(reqAnimation)
-            map.fitBounds(widerAreaBounds)
+            map.fitBounds(widerAreaBounds, widerAreaOpts)
             map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk"], true, false])
             map.setLayoutProperty('Populated place', 'visibility', 'visible')
             map.setLayoutProperty('overlays', 'visibility', 'none')
@@ -200,7 +204,7 @@ const renderMap = async (webpEnabled) => {
             bodyDesktop?.style.setProperty("--opacity", 0)
             body?.style.setProperty("--opacity", 0)
             cancelAnimationFrame(reqAnimation)
-            map.fitBounds(widerAreaBounds)
+            map.fitBounds(widerAreaBounds, widerAreaOpts)
             map.setLayoutProperty('overlays', 'visibility', 'none')
             map.setLayoutProperty('Road-label', 'visibility', 'none')
             map.setLayoutProperty('Ridge-label', 'visibility', 'none')
@@ -215,8 +219,9 @@ const renderMap = async (webpEnabled) => {
                 map.setLayoutProperty('Area-control-label', 'visibility', 'none')
                 map.setLayoutProperty('overlays', 'visibility', 'none')
                 map.setLayoutProperty('Ridge-label', 'visibility', 'none')
+                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk"], true, false])
                 // map.fitBounds(bakhmutBounds)
-                map.flyTo({ center: { lng: 38.01284542392864, lat: 48.59740813939732 }, bearing: -87.81693712944023, pitch: 60, duration: 1000, zoom: 13.071195853786996 })
+                map.flyTo(bakhmutCloseUp)
             }
         })
 
@@ -233,13 +238,13 @@ const renderMap = async (webpEnabled) => {
                 map.setLayoutProperty('road_secondary_tertiary_dark', 'visibility', 'none')
                 map.setLayoutProperty('Area-control-label', 'visibility', 'none')
                 map.setFilter('Area-control-label', ["match", ['get', 'name'], ["Russian\ncontrol", "Ukrainian\ncounteroffensive"], false, false])
-                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk"], true, false])
+                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Berkhivka"], true, false])
                 map.setLayoutProperty('overlays', 'visibility', 'none')
                 map.setPaintProperty('Populated place', 'text-color', '#fff')
                 map.setPaintProperty('Populated place', 'text-halo-color', '#333')
                 map.setPaintProperty('Ridge-label', 'text-color', '#fff')
                 map.setPaintProperty('Ridge-label', 'text-halo-color', '#333')
-                map.flyTo({ center: { lng: 38.01284542392864, lat: 48.59740813939732 }, bearing: -87.81693712944023, pitch: 60, duration: 1000, zoom: 13.071195853786996 })
+                map.flyTo(bakhmutCloseUp)
             }
         })
 
@@ -258,9 +263,9 @@ const renderMap = async (webpEnabled) => {
                 map.setLayoutProperty('Area-control-label', 'visibility', 'visible')
                 map.setFilter('Area-control-label', ["match",['get', 'name'], ["Russian\ncontrol"], true, false])
                 map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk", "Soledar", "Berkhivka"], true, false])
-                map.setPaintProperty('Populated place', 'text-color', '#333')
+                map.setPaintProperty('Populated place', 'text-color', '#121212')
                 map.setPaintProperty('Populated place', 'text-halo-color', '#fff')
-                map.setPaintProperty('Ridge-label', 'text-color', '#333')
+                map.setPaintProperty('Ridge-label', 'text-color', '#121212')
                 map.setPaintProperty('Ridge-label', 'text-halo-color', '#fff')
             }
         })

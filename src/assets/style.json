@@ -493,6 +493,7 @@
             }
         }
     ],
+    "fog": null,
     "terrain": {
         "source": "terrainSource",
         "exaggeration": 3
