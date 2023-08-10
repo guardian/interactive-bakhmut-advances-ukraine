@@ -405,3 +405,13 @@ body {
     }
   }
 }
+
+[data-link-name="related-stories"], [data-link-headlines="headlines"] {
+  position: relative !important;
+  z-index: -1 !important;
+  display: none !important;
+}
+
+[data-link-name="carousel-small-arrow-prev"], [data-link-name="carousel-small-arrow-next"] {
+  display: none !important;
+}

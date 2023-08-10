@@ -216,7 +216,7 @@ const renderMap = async (webpEnabled) => {
             current = 1
             cancelAnimationFrame(reqAnimation)
             map.fitBounds(widerAreaBounds, widerAreaOpts)
-            map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk"], true, false])
+            map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Sloviansk"], true, false])
             map.setLayoutProperty('Populated place', 'visibility', 'visible')
             map.setLayoutProperty('overlays', 'visibility', 'none')
             bodyDesktop?.style.setProperty("--opacity", 0)
@@ -254,7 +254,7 @@ const renderMap = async (webpEnabled) => {
                 map.setLayoutProperty('Area-control-label', 'visibility', 'none')
                 map.setLayoutProperty('overlays', 'visibility', 'none')
                 map.setLayoutProperty('Ridge-label', 'visibility', 'none')
-                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk"], true, false])
+                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Sloviansk"], true, false])
                 // map.fitBounds(bakhmutBounds)
                 map.flyTo(bakhmutCloseUp)
             }
@@ -297,7 +297,7 @@ const renderMap = async (webpEnabled) => {
                 map.setLayoutProperty('road_secondary_tertiary_dark', 'visibility', 'visible')
                 map.setLayoutProperty('Area-control-label', 'visibility', 'visible')
                 map.setFilter('Area-control-label', ["match",['get', 'name'], ["Russian\ncontrol"], true, false])
-                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk", "Soledar", "Berkhivka"], true, false])
+                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Sloviansk", "Soledar", "Berkhivka"], true, false])
                 map.setPaintProperty('Populated place', 'text-color', '#121212')
                 map.setPaintProperty('Populated place', 'text-halo-color', '#fff')
                 map.setPaintProperty('Ridge-label', 'text-color', '#121212')
@@ -317,7 +317,7 @@ const renderMap = async (webpEnabled) => {
                 map.setLayoutProperty('road_secondary_tertiary_dark', 'visibility', 'visible')
                 map.setLayoutProperty('Area-control-label', 'visibility', 'visible')                
                 map.setFilter('Area-control-label', ["match", ['get', 'name'], ["Russian\ncontrol"], true, false])
-                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk", "Soledar", "Berkhivka"], true, false])
+                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Sloviansk", "Soledar", "Berkhivka"], true, false])
             }
         })
 
@@ -342,7 +342,7 @@ const renderMap = async (webpEnabled) => {
 
         scrolly.addTrigger({
             num: 10, do: () => {
-                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk", "Soledar", "Berkhivka"], true, false])
+                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Sloviansk", "Soledar", "Berkhivka"], true, false])
                 map.fitBounds(bakhmutBounds, bakhmutBwOpts)
                 renderOverlays('06/06/2023')
             }
@@ -350,7 +350,7 @@ const renderMap = async (webpEnabled) => {
 
         scrolly.addTrigger({
             num: 11, do: () => {
-                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Slovyansk", "Soledar", "Berkhivka", "Andriivka"], true, false])
+                map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Sloviansk", "Soledar", "Berkhivka", "Andriivka"], true, false])
                 map.fitBounds(bakhmutAndSouthBounds, { duration: 1000, pitch: 45 })
                 renderOverlays('03/08/2023')
             }
