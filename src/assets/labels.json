@@ -1,1 +1,278 @@
-{"type":"FeatureCollection","name":"labelscontinent_0","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"featurecla":"Populated place","name":"Bakhmut"},"geometry":{"type":"Point","coordinates":[37.997989,48.609085]}},{"type":"Feature","properties":{"featurecla":"Populated place","name":"Khromove"},"geometry":{"type":"Point","coordinates":[37.9406355,48.5998889]}},{"type":"Feature","properties":{"featurecla":"Populated place","name":"Ivanivske"},"geometry":{"type":"Point","coordinates":[37.9169075,48.5720955]}},{"type":"Feature","properties":{"featurecla":"Populated place","name":"Yahidne"},"geometry":{"type":"Point","coordinates":[37.9717809,48.6268859]}},{"type":"Feature","properties":{"featurecla":"Populated place","name":"Berkhivka"},"geometry":{"type":"Point","coordinates":[37.9606205,48.6466289]}},{"type":"Feature","properties":{"featurecla":"Populated place","name":"Soledar"},"geometry":{"type":"Point","coordinates":[38.096697,48.676135]}},{"type":"Feature","properties":{"featurecla":"Point","name":"Russian\ncontrol","slide":5},"geometry":{"type":"Point","coordinates":[38.082998,48.602127]}},{"type":"Feature","properties":{"featurecla":"Point","name":"Ukrainian\ncounteroffensive","slide":1},"geometry":{"type":"Point","coordinates":[37.943044,48.630539]}},{"type":"Feature","properties":{"featurecla":"Road","name":"M03"},"geometry":{"type":"Point","coordinates":[38.047843191801874,48.61823832103909]}},{"type":"Feature","properties":{"featurecla":"Populated place","name":"Sloviansk"},"geometry":{"type":"Point","coordinates":[37.605322,48.853152]}},{"type":"Feature","properties":{"featurecla":"Populated place","name":"Andriivka"},"geometry":{"type":"Point","coordinates":[37.96529,48.50109]}},{"type":"Feature","properties":{"featurecla":"Populated place","name":"Kramatorsk"},"geometry":{"type":"Point","coordinates":[37.580877,48.727055]}},{"type":"Feature","properties":{"featurecla":"River","name":"Bakhmutovka\nriver"},"geometry":{"type":"Point","coordinates":[38.008859,48.589055]}},{"type":"Feature","properties":{"featurecla":"Ridge","name":"Winery\nridge"},"geometry":{"type":"Point","coordinates":[38.029685,48.597598]}},{"type":"Feature","properties":{"featurecla":"Ridge","name":"Khromove\nridge"},"geometry":{"type":"Point","coordinates":[37.918729,48.606193]}},{"type":"Feature","properties":{"featurecla":"Ridge","name":"Berkhivka\nridge"},"geometry":{"type":"Point","coordinates":[37.904547,48.653982]}},{"type":"Feature","properties":{"featurecla":"Ridge","name":"Ivanivske\nridge"},"geometry":{"type":"Point","coordinates":[37.938882,48.547575]}},{"type":"Feature","properties":{"featurecla":"Ridge","name":"Junction\nridge"},"geometry":{"type":"Point","coordinates":[37.9673565,48.6622587]}}]}
+{
+    "type": "FeatureCollection",
+    "name": "labelscontinent_0",
+    "crs": {
+        "type": "name",
+        "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+    },
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Bakhmut"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.997989,
+                    48.609085
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Khromove"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.9406355,
+                    48.5998889
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Ivanivske"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.9169075,
+                    48.5720955
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Yahidne"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.9717809,
+                    48.6268859
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Berkhivka"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.9606205,
+                    48.6466289
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Soledar"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.096697,
+                    48.676135
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Point",
+                "name": "Russian\ncontrol",
+                "slide": 5
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.082998,
+                    48.602127
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Point",
+                "name": "Ukrainian\ncounteroffensive",
+                "slide": 1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.943044,
+                    48.630539
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Road",
+                "name": "M03"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.047843191801874,
+                    48.61823832103909
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Sloviansk"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.605322,
+                    48.853152
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Andriivka"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.96529,
+                    48.50109
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Chasiv Yar"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.835883,48.588442                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Kramatorsk"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.580877,
+                    48.727055
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "River",
+                "name": "Bakhmutovka\nriver"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.008859,
+                    48.589055
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Ridge",
+                "name": "Winery\nridge"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.029685,
+                    48.597598
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Ridge",
+                "name": "Khromove\nridge"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.918729,
+                    48.606193
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Ridge",
+                "name": "Berkhivka\nridge"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.904547,
+                    48.653982
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Ridge",
+                "name": "Ivanivske\nridge"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.938882,
+                    48.547575
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Ridge",
+                "name": "Junction\nridge"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.9673565,
+                    48.6622587
+                ]
+            }
+        }
+    ]
+}

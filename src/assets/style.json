@@ -35,6 +35,11 @@
             "data": null,
             "lineMetrics": true
         },
+        "chasivyar":{
+            "type": "geojson",
+            "data": null,
+            "lineMetrics": true
+        },
         "labels": {
             "type": "geojson"
         },
@@ -143,6 +148,18 @@
             "paint":{
                 "fill-color":"#333",
                 "fill-opacity": 0.3
+            }
+        },
+        {
+            "id":"chasivyar-white",
+            "type":"fill",
+            "source":"chasivyar",
+            "layout":{
+                "visibility":"visible"
+            },
+            "paint":{
+                "fill-color":"#ffffff",
+                "fill-opacity":0.3
             }
         },
         {

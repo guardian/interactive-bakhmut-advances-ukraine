@@ -9,6 +9,7 @@ import LocatorComp from '$lib/helpers/Locator.js'
 import { $, $$ } from '$lib/helpers/util.js'
 import ScrollyTeller from "$lib/helpers/scrollyteller.js"
 import bakhmut from "$assets/bakhmut-shape.json"
+import chasivyar from "$assets/chasivyar-shape.json"
 import 'maplibre-gl/dist/maplibre-gl.css';
 // import { tileUrls } from '$assets/preloadedTiles.js'
 
@@ -31,6 +32,7 @@ let map
 
 style.sources.labels.data = labels
 style.sources.bakhmut.data = bakhmut
+style.sources.chasivyar.data = chasivyar
 
 //-------------------------set up the scrolly-------------------------------------
 
@@ -88,10 +90,35 @@ const renderMap = async (webpEnabled) => {
         map.setFilter('overlays', ["match", ['get', 'date'], date.replace(/\//g, '-'), true, false])
     }
 
+    const cyLatLong = [ 37.835883,48.588442]
+
     const widerAreaBounds = [[37.4872599076183448, 48.5499422913235676], [38.0593925657791559, 48.8995789157551712]]
     const widerAreaOpts = isMobile ? { padding: { top: 0, bottom: 0, right: 20, left: 10, pitch: 20, duration: 1000 } } : { duration: 1000 }
     const bakhmutOpts = isMobile ? { padding: { top: 0, bottom: 0, right: 70, left: 40, duration: 1000 } } : { duration: 1000 }
-    const bakhmutCloseUp = isMobile ? { center: { lng: 38.01284542392864, lat: 48.59740813939732 }, bearing: -45.81693712944023, pitch: 60, duration: 1000, zoom: 11.0 } : { center: { lng: 38.01284542392864, lat: 48.59740813939732 }, bearing: -82.81693712944023, pitch: 60, duration: 1000, zoom: 13.071195853786996 }
+    const bakhmutCloseUp = isMobile ? 
+    { center: { lng: 38.01284542392864, lat: 48.59740813939732 },
+    bearing: -45.81693712944023, 
+    pitch: 60, 
+    duration: 1000, 
+    zoom: 11.0 } : 
+    { center: { lng: 38.01284542392864, 
+        lat: 48.59740813939732 }, 
+        bearing: -82.81693712944023, 
+        pitch: 60, duration: 
+        1000, 
+        zoom: 13.071195853786996 }
+
+        const cyCloseUp = isMobile ? 
+        { center: { lng: cyLatLong[0], lat: cyLatLong[1] },
+        bearing: -30, 
+        pitch: 70, 
+        duration: 1000, 
+        zoom: 13.0 } : 
+        { center: { lng: cyLatLong[0], lat: cyLatLong[1] },
+        bearing: -30, 
+        pitch: 70, 
+        duration: 1000, 
+        zoom: 13.0 }
 
     const bakhmutBwOpts = isMobile ? { padding: { top: 0, bottom: 0, right: 62, left: 100 }, duration: 1000, pitch: 35 } : bakhmutOpts
     
@@ -106,6 +133,11 @@ const renderMap = async (webpEnabled) => {
         [38.070910, 48.490000],
         [37.898447460053035,48.647324]
     ]
+
+    const bakhmutAndSouthBoundsWithChasivYar = [
+        [38.070910, 48.490000],          // top-left corner
+        [37.835883, 48.647324]           // bottom-right corner adjusted to include Chasiv Yar
+    ];
 
     const locatorMap = new LocatorComp(locatorWidth, locatorHeight, ukraine, ukraine.objects.UKR_adm0, map.getBounds(), {x:width - locatorWidth - 10, y:0})
     locatorMap.addLocator(svg)
@@ -192,7 +224,8 @@ const renderMap = async (webpEnabled) => {
         scrolly.addTrigger({num: 0, do: (d) => {
             scrollArrow.style.opacity = 1
             current = 0
-            map.fitBounds(bakhmutBounds)
+            //  map.fitBounds(bakhmutBounds)
+            map.fitBounds(bakhmutAndSouthBoundsWithChasivYar)
             map.setLayoutProperty('Populated place', 'visibility', 'none')
             map.setLayoutProperty('overlays', 'visibility', 'none')
             bodyDesktop?.style.setProperty("--opacity", 1)
@@ -216,7 +249,7 @@ const renderMap = async (webpEnabled) => {
             current = 1
             cancelAnimationFrame(reqAnimation)
             map.fitBounds(widerAreaBounds, widerAreaOpts)
-            map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Sloviansk"], true, false])
+            map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Sloviansk", "Chasiv Yar"], true, false])
             map.setLayoutProperty('Populated place', 'visibility', 'visible')
             map.setLayoutProperty('overlays', 'visibility', 'none')
             bodyDesktop?.style.setProperty("--opacity", 0)
@@ -279,7 +312,7 @@ const renderMap = async (webpEnabled) => {
                 map.setPaintProperty('Populated place', 'text-halo-color', '#333')
                 map.setPaintProperty('Ridge-label', 'text-color', '#fff')
                 map.setPaintProperty('Ridge-label', 'text-halo-color', '#333')
-                map.flyTo(bakhmutCloseUp)
+                map.flyTo(cyCloseUp)
             }
         })
 
