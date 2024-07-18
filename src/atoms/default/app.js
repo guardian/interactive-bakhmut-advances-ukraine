@@ -150,7 +150,7 @@ const renderMap = async (webpEnabled) => {
         minZoom: 4,
         pitch: 45,
         maxPitch: 85,
-        interactive: false,
+        interactive: true,
     })
     let nav = new NavigationControl({ showCompass: true, showZoom: false, visualizePitch: true })
     map.addControl(nav, 'top-left')

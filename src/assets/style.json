@@ -216,6 +216,26 @@
                 ["!=", "brunnel", "tunnel"],
                 ["!=", "intermittent", 1]
             ]
+        },
+        {
+            "id": "waterway_canal",
+            "type": "line",
+            "source": "vector-tiles",
+            "source-layer": "waterway",
+            "layout": {
+                "line-cap": "round",
+                "visibility": "visible"
+            },
+            "paint": {
+                "line-color": "#00b2ff",
+                "line-width":2,
+                "line-opacity":0.5
+            },
+            "metadata": {},
+            "filter": ["all", ["==", "class", "canal"],
+                ["!=", "brunnel", "tunnel"],
+                ["!=", "intermittent", 1]
+            ]
         }
         , {
             "id": "water",
