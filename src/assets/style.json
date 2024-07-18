@@ -176,8 +176,27 @@
                 "hillshade-highlight-color": "#FFFFFF",
                 "hillshade-illumination-anchor": "viewport",
                 "hillshade-illumination-direction": 330
-            }
+            }            
         },
+        {
+            "id": "plateau",
+            "type": "hillshade",
+            "source": "hillshadeSource",
+            "layout": {
+                "visibility": "visible"
+            },
+            "filter": [">", ["get", "elevation"], 1000000],
+            "paint": {
+                "hillshade-shadow-color": "green",
+                "hillshade-accent-color": "pink",
+                "hillshade-exaggeration": 1,
+                "hillshade-highlight-color": "purple",
+                "hillshade-illumination-anchor": "viewport",
+                "hillshade-illumination-direction": 330
+            }
+            
+        },
+
         {
             "id": "waterway_river",
             "type": "line",
@@ -214,6 +233,24 @@
             "filter": ["all", ["!=", "intermittent", 1],
                 ["!=", "brunnel", "tunnel"]
             ]
+        },
+        {
+            "id": "admin-2-boundary",
+            "type": "line",
+            "source": "vector-tiles",
+            "source-layer": "boundary",
+            "layout": {
+                "line-cap": "round",
+                "line-join": "round",
+                "visibility": "visible"
+            },
+            "paint": {
+                "line-color": "#FF00aa",
+                "line-width": 3,
+                "line-opacity":1
+            },
+            "metadata": {},
+            "filter": ["all", ["==", "admin_level", 2]]
         }, 
         {
             "id": "road_trunk_primary_white",

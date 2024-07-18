@@ -44,6 +44,7 @@ $whiteDark: #f6f6f6;
 
     @include mq(desktop) {
       background-image: url('https://media.guim.co.uk/1fa5a8feda97ab18364493348627f3712d99505d/0_0_3360_1828/2000.jpg');
+      // background-image: url("https://media.guim.co.uk/bfb95fdf377a9bf3b55874b7df5e9e042191fad9/0_2_5142_3086/2000.jpg");
       background-position: center;
       height: 100vh;
     }
