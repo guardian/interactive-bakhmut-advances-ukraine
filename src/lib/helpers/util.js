@@ -107,4 +107,28 @@ const featureTest = (property, value, noPrefixes) => {
 
 const supportsSticky = () => (featureTest('position', 'sticky') || featureTest('position', '-webkit-sticky'))
 
-export { $, $$, round, numberWithCommas, wait, getDimensions, hashPattern, duplicate, pseq, sum, ordinal, featureTest, supportsSticky }
+const showTownLabels = (map, labels) => {
+  return  map.setFilter('Populated place', ["match", ['get', 'name'], labels, true, false])
+}
+
+const makeTownLabelsTidy  = (map) => {
+  map.setPaintProperty('Populated place', 'text-color', 'black')
+  map.setLayoutProperty('Populated place', 'text-font', ['Gdn Text Sans TS3Regular'])
+  map.setLayoutProperty('Populated place', 'text-size', 14)
+  map.setPaintProperty('Populated place', 'text-halo-color', '#fff')
+  // map.setPaintProperty('Populated place', 'text-halo-width', 1)
+  // map.setPaintProperty('Populated place', "text-halo-blur", 0.5,)
+
+
+  return map
+}
+
+const makeTownLabelsBeefy  = (map) => {
+  map.setPaintProperty('Populated place', 'text-color', 'white')
+  map.setLayoutProperty('Populated place', 'text-font', ['Gdn Text Sans TS3Bold'])
+  map.setLayoutProperty('Populated place', 'text-size', 16)
+  map.setPaintProperty('Populated place', 'text-halo-color', '#333')
+  return map
+}
+
+export { $, $$, round, numberWithCommas, wait, getDimensions, hashPattern, duplicate, pseq, sum, ordinal, featureTest, supportsSticky, showTownLabels, makeTownLabelsTidy, makeTownLabelsBeefy }

@@ -270,7 +270,12 @@
                 "line-opacity":1
             },
             "metadata": {},
-            "filter": ["all", ["==", "admin_level", 2]]
+            "filter": ["all", 
+            ["==", "admin_level", 2],
+            ["!=", "maritime", 1],
+            ["!=", "disputed", 1]
+            
+        ]
         }, 
         {
             "id": "road_trunk_primary_white",
