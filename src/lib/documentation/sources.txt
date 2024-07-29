@@ -1,0 +1,11 @@
+elevation:
+tilezen
+note:attribution needed
+https://registry.opendata.aws/terrain-tiles/
+
+
+urban areas:
+daylight - 
+https://daylightmap.org/
+
+

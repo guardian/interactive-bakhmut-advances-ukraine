@@ -1,0 +1,270 @@
+{
+    "type": "FeatureCollection",
+    "name": "labelscontinent_0",
+    "crs": {
+        "type": "name",
+        "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+    },
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Bakhmut"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.997989,
+                    48.609085
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Khromove"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.9406355,
+                    48.5998889
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Ivanivske"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.9169075,
+                    48.5720955
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Yahidne"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.9717809,
+                    48.6268859
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Berkhivka"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.9606205,
+                    48.6466289
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Soledar"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.096697,
+                    48.676135
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Vovchansk"
+            },
+            "geometry": {
+                "coordinates": [
+                    36.93677852152996,
+                    50.29284922967932
+                ],
+                "type": "Point"
+            },
+            "id": 0
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Belgorod"
+            },
+            "geometry": {
+                "coordinates": [
+                    36.6,
+                    50.6
+                ],
+                "type": "Point"
+            },
+            "id": 0
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Hlyboke"
+            },
+            "geometry": {
+                "coordinates": [
+                    36.427783465224934,
+                    50.25546781513927
+                ],
+                "type": "Point"
+            },
+            "id": 1
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Featurecla": "Populated place",
+                "name": "Kharkiv"
+            },
+            "geometry": {
+                "coordinates": [
+                    36.23300136042724,
+                    49.99329335992425
+                ],
+                "type": "Point"
+            },
+            "id": 2
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Sloviansk",
+                "priority" : 2
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.605322,
+                    48.853152
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Andriivka"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.96529,
+                    48.50109
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Chasiv Yar"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.835883,
+                    48.588442
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Kramatorsk",
+                "priority": 1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.580877,
+                    48.727055
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Kyiv",
+                "priority": 1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    30.521220433013184,
+                    50.44258206184753                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+                "name": "Pokrovsk",
+                "priority": 1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.17370090886283,
+                    48.28096343242149          
+]
+            }
+        },
+       {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Ridge",
+                "name": "Plateau",
+                "notes" : "Plateau between Chasiv Yar and Kramatorsk"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.70897244167577,
+                    48.681155519104124                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Border",
+                "name": "Donetsk oblast"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    36.90262585753558,
+                    48.680876693481906            ]
+            }
+        }
+    ]
+}
