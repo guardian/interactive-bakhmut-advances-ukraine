@@ -131,4 +131,32 @@ const makeTownLabelsBeefy  = (map) => {
   return map
 }
 
-export { $, $$, round, numberWithCommas, wait, getDimensions, hashPattern, duplicate, pseq, sum, ordinal, featureTest, supportsSticky, showTownLabels, makeTownLabelsTidy, makeTownLabelsBeefy }
+const fetchData = async (url) => {
+  try {
+      const response = await fetch(url)
+      if (response.status === 200) {
+          return await response.json()
+      } else {
+          console.log('Response status', response.status, 'for url', url);
+      }
+  } 
+  catch (error){
+      console.error("FETCH ERROR:", error)
+  }
+}
+
+const fetchAllData = async () => {
+  const [oblaststopo, urbantopo, controltopo] = await Promise.all([
+      fetchData('__assetsPath__/oblaststopo.json'), 
+      fetchData('__assetsPath__/urbantopo.json'),
+      fetchData('__assetsPath__/controltopo.json'),
+  ] )
+
+  return {
+      oblaststopo,
+      urbantopo,
+      controltopo,
+  }
+}
+
+export { $, $$, round, numberWithCommas, wait, getDimensions, hashPattern, duplicate, pseq, sum, ordinal, featureTest, supportsSticky, showTownLabels, makeTownLabelsTidy, makeTownLabelsBeefy, fetchAllData, fetchData }
