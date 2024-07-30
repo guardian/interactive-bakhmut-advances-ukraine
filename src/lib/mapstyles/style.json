@@ -50,6 +50,10 @@
             "type": "geojson",
             "data" :null
         },
+        "advances" :{
+            "type": "geojson",
+            "data" :null
+        },
         "bakhmut": {
             "type": "geojson",
             "data": null,
@@ -90,6 +94,18 @@
             "paint": {
                 "fill-color": "red",
                 "fill-opacity": 0.2
+            }
+        },
+        {
+            "id": "advances",
+            "type": "fill",
+            "source": "advances",
+            "layout": {
+                "visibility": "visible"
+            },
+            "paint": {
+                "fill-color": "black",
+                "fill-opacity": 0.8
             }
         },
         {

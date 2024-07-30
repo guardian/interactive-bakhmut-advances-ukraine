@@ -146,16 +146,18 @@ const fetchData = async (url) => {
 }
 
 const fetchAllData = async () => {
-  const [oblaststopo, urbantopo, controltopo] = await Promise.all([
+  const [oblaststopo, urbantopo, controltopo, advancestopo] = await Promise.all([
       fetchData('__assetsPath__/oblaststopo.json'), 
       fetchData('__assetsPath__/urbantopo.json'),
       fetchData('__assetsPath__/controltopo.json'),
+      fetchData('__assetsPath__/advances.json'),
   ] )
 
   return {
       oblaststopo,
       urbantopo,
       controltopo,
+      advancestopo
   }
 }
 

@@ -78,17 +78,21 @@ function rotateCamera() {
 
 const renderMap = async (webpEnabled) => {
 
-    const {urbantopo,oblaststopo,controltopo} = await fetchAllData()
+    const {urbantopo,oblaststopo,controltopo,advancestopo} = await fetchAllData()
 
 const urban = feature(urbantopo, urbantopo.objects.urban)
 const oblasts = feature(oblaststopo, oblaststopo.objects.oblasts)
 const control = feature(controltopo, controltopo.objects.UkraineControlMapAO17JUL2024geo)
+const advances = feature(advancestopo, advancestopo.objects.AssessedRussianAdvancesinUkraineJUL282024)
+
+console.log(advances)
 
 style.sources.labels.data = labels
 style.sources.control.data = control
 style.sources.oblasts.data = oblasts
 style.sources.hotspots.data = hotspots
 style.sources.urban.data = urban
+style.sources.advances.data = advances
 
 
     // const topoFile = await fetch('__assetsPath__/ukraine_layers_parsed.json')
@@ -157,6 +161,10 @@ style.sources.urban.data = urban
         map.on('click', 'oblasts', function (e) {
             console.log(e.features);
         });
+
+        map.on('zoom', () => {
+            locatorMap.updateLocator(map.getBounds())
+        })
 
         scrolly.addTrigger({
             num: 0, do: (d) => {
@@ -266,7 +274,7 @@ style.sources.urban.data = urban
                 showTownLabels(map, ["Vovchansk", "Hlyboke", "Kharkiv","Belgorod"])
                 map.setLayoutProperty('hills', 'visibility', 'none')
                 map.flyTo(presetbounds.vovchanskCloseUp)
-                
+
             }
         })
 
