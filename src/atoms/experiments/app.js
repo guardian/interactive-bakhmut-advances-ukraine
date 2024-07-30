@@ -15,17 +15,6 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 // import control from '$lib/geo/UkraineControlMapAO17JUL2024geo.json'
 import { showTownLabels, makeTownLabelsTidy, fetchData, fetchAllData } from '$lib/helpers/util'
 
-// import controltopo from '$lib/geo/UkraineControlMapAO17JUL2024topo.json'
-// import oblaststopo from '$lib/geo/oblaststopo.json'
-// import urbantopo from '$lib/geo/urbantopo.json'
-// import * as topojson from 'topojson-client'
-
-
-
-
-// import bakhmut from "$assets/bakhmut-shape.json"
-// import chasivyar from "$assets/chasivyar-shape.json"
-// import { tileUrls } from '$assets/preloadedTiles.js'
 import * as presetbounds from '$lib/geo/bounds.js'
 import { makeTownLabelsBeefy } from '../../lib/helpers/util'
 
@@ -277,6 +266,7 @@ style.sources.urban.data = urban
                 showTownLabels(map, ["Vovchansk", "Hlyboke", "Kharkiv","Belgorod"])
                 map.setLayoutProperty('hills', 'visibility', 'none')
                 map.flyTo(presetbounds.vovchanskCloseUp)
+                
             }
         })
 
