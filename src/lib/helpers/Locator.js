@@ -48,21 +48,22 @@ export default class Locator {
 		.attr('fill', 'none')
 	}
 
+
 	updateLocator(extent){
 
-		this.ne = extent._ne;
-		this.sw = extent._sw;
+        this.ne = extent._ne;
+        this.sw = extent._sw;
+        this.nw = {lat:this.ne.lat, lng:this.sw.lng};
+        this.se = {lat:this.sw.lat, lng:this.ne.lng};
 
-		this.topRight = this.projection([this.ne.lng, this.ne.lat]);
-		this.bottomLeft = this.projection([this.sw.lng, this.sw.lat]);
-
-		this.rectWidth = this.topRight[0] - this.bottomLeft[0];
-		this.rectHeight = this.bottomLeft[1] - this.topRight[1];
-
-		this.rect
-		.attr("d", this.path({
-			type: "LineString",
-			coordinates: [[this.ne.lng, this.ne.lat],[this.se.lng,this.se.lat],[this.sw.lng,this.sw.lat],[this.nw.lng, this.nw.lat],[this.ne.lng, this.ne.lat]]
-		} ))
-	}
+        this.rect
+        .attr("d", this.path({
+            type: "LineString",
+            coordinates: [
+                [this.ne.lng, this.ne.lat],[this.nw.lng, this.nw.lat],
+                [this.sw.lng,this.sw.lat], [this.se.lng,this.se.lat],
+                [this.ne.lng, this.ne.lat]
+            ]
+        } ))
+    }
 }
