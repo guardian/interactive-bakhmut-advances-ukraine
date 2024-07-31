@@ -11,20 +11,17 @@ export async function render() {
     let html = ``
     doc.chapters.forEach(element => {
 
-        const dateArr = element.date.split('/')
-        const date = `${dateArr[0]} ${months[parseInt(dateArr[1]) -1]} ${dateArr[2]}`
+        // const dateArr = element.date.split('/')
+        // const date = `${dateArr[0]} ${months[parseInt(dateArr[1]) -1]} ${dateArr[2]}`
 
         if(element.chapter)
         {
-            let headerDate
-            if (element.date) headerDate = date
-            else headerDate = ''
 
             html += `<div class="scroll-text__inner">
                 <div class="scroll-text__div">
-                    <time>${headerDate}</time>
                     ${element.headingText && `<h2>${element.headingText}</h2>`}
                     <p>${element.bodyText}</p>
+                    ${element.img ? `<img class="gv-scrolly-image" src="${element.img}" alt="" />`: ''}
                 </div>
             </div>`
         }

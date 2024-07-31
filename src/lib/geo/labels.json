@@ -257,13 +257,39 @@
             "type": "Feature",
             "properties": {
                 "featurecla": "Border",
-                "name": "Donetsk oblast"
+                "name": "Donetsk\noblast"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
                     36.90262585753558,
                     48.680876693481906            ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Country",
+                "name": "Russia"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    36.069142074987866,
+                    50.53689691066606]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Country",
+                "name": "Ukraine"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    36.074644901140914,
+                    50.28139140768093]
             }
         }
     ]

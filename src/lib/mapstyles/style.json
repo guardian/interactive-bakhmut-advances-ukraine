@@ -50,10 +50,6 @@
             "type": "geojson",
             "data" :null
         },
-        "advances" :{
-            "type": "geojson",
-            "data" :null
-        },
         "bakhmut": {
             "type": "geojson",
             "data": null,
@@ -63,6 +59,11 @@
             "type": "geojson",
             "data": null,
             "lineMetrics": true
+        },
+        "advances" :{
+            "type": "geojson",
+            "data" :null,
+            "lineMetrics": false
         },
         "labels": {
             "type": "geojson"
@@ -92,20 +93,8 @@
                 "visibility": "none"
             },
             "paint": {
-                "fill-color": "red",
+                "fill-color": "#c70000",
                 "fill-opacity": 0.2
-            }
-        },
-        {
-            "id": "advances",
-            "type": "fill",
-            "source": "advances",
-            "layout": {
-                "visibility": "visible"
-            },
-            "paint": {
-                "fill-color": "black",
-                "fill-opacity": 0.8
             }
         },
         {
@@ -216,7 +205,7 @@
                 ]
             ],
             "layout": {
-                "visibility": "visible"
+                "visibility": "none"
             },
             "paint": {
                 "line-color": "purple",
@@ -363,9 +352,24 @@
             "id": "hotspots-layer",
             "type": "circle",
             "source": "hotspots",
+            "layout": {
+            "visibility": "none"
+            },
             "paint": {
                 "circle-radius": 2,
                 "circle-color": "red"
+            }
+        },
+        {
+            "id": "advances-layer",
+            "type": "fill",
+            "source": "advances",
+            "layout": {
+                "visibility": "visible"
+            },
+            "paint": {
+                "fill-color": "#880105",
+                "fill-opacity": 0.4
             }
         },
         {
@@ -380,7 +384,7 @@
             },
             "paint": {
                 "line-color": "#494949",
-                "line-width": 1,
+                "line-width": 2,
                 "line-opacity": 1
             },
             "metadata": {},
@@ -390,6 +394,45 @@
                     "==",
                     "admin_level",
                     2
+                ],
+                [
+                    "!=",
+                    "maritime",
+                    1
+                ],
+                [
+                    "!=",
+                    "disputed",
+                    1
+                ]
+            ]
+        },
+        {
+            "id": "admin-4-boundary",
+            "type": "line",
+            "source": "vector-tiles",
+            "source-layer": "boundary",
+            "layout": {
+                "line-cap": "round",
+                "line-join": "round",
+                "visibility": "visible"
+            },
+            "paint": {
+                "line-color": "#494949",
+                "line-width": 1,
+                "line-opacity": 1,
+                "line-dasharray": [
+                    4,
+                    4
+                ]
+            },
+            "metadata": {},
+            "filter": [
+                "all",
+                [
+                    "==",
+                    "admin_level",
+                    4
                 ],
                 [
                     "!=",
@@ -639,12 +682,75 @@
                 "text-halo-blur": 0.5,
                 "text-color": "#ffffff"
             }
+        },
+        {
+            "id": "Country-label",
+            "type": "symbol",
+            "source": "labels",
+            "minzoom": 3,
+            "maxzoom": 22,
+            "filter": [
+                "==",
+                "featurecla",
+                "Country"
+            ],
+            "layout": {
+                "text-size": 16,
+                "text-font": [
+                    "GH Guardian Headline Semibold"
+                ],
+                "text-field": "{name}",
+                "text-variable-anchor": [
+                    "center"
+                ],
+                "text-radial-offset": 0.5,
+                "text-justify": "auto",
+                "visibility": "none"
+            },
+            "paint": {
+                "text-halo-color": "#333",
+                "text-halo-width": 1,
+                "text-halo-blur": 0.5,
+                "text-color": "white"
+            }
+        },
+        {
+            "id": "Oblast-label",
+            "type": "symbol",
+            "source": "labels",
+            "minzoom": 3,
+            "maxzoom": 22,
+            "filter": [
+                "==",
+                "featurecla",
+                "Border"
+            ],
+            "layout": {
+                "text-size": 16,
+                "text-font": [
+                    "GH Guardian Headline Medium"
+                ],
+                "text-field": "{name}",
+                "text-variable-anchor": [
+                    "center"
+                ],
+                "text-radial-offset": 0.5,
+                "text-justify": "auto",
+                "visibility": "none"
+            },
+            "paint": {
+                "text-halo-color": "white",
+                "text-halo-width": 1,
+                "text-halo-blur": 0.5,
+                "text-color": "#494949"
+            }
         }
     ],
+    
     "fog": null,
     "terrain": {
         "source": "terrainSource",
-        "exaggeration": 4
+        "exaggeration": 1
     },
     "comments": {
         "blah": "https://interactive.guim.co.uk/maptiles/terrain/tilezen-terrain-tiles-07-2024/{z}/{x}/{y}.png",
@@ -661,7 +767,11 @@
             "paint": {
                 "line-color": "purple",
                 "line-width": 1,
-                "line-opacity": 1
+                "line-opacity": 1,
+                "line-dasharray": [
+                    2,
+                    2
+                ]
             },
             "metadata": {},
             "filter": [

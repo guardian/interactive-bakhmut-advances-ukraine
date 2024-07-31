@@ -33,16 +33,6 @@ const locatorHeight = isMobile ? 120 : 150
 
 let map
 
-//-------------------------feed map styles with extra data------------------------
-
-// style.sources.labels.data = labels
-// style.sources.control.data = control
-// style.sources.oblasts.data = oblasts
-// style.sources.hotspots.data = hotspots
-// style.sources.urban.data = urban
-// style.sources.bakhmut.data = bakhmut
-// style.sources.chasivyar.data = chasivyar
-
 //-------------------------set up the scrolly-------------------------------------
 
 const scrolly = new ScrollyTeller({
@@ -82,8 +72,8 @@ const renderMap = async (webpEnabled) => {
 
 const urban = feature(urbantopo, urbantopo.objects.urban)
 const oblasts = feature(oblaststopo, oblaststopo.objects.oblasts)
-const control = feature(controltopo, controltopo.objects.UkraineControlMapAO17JUL2024geo)
-const advances = feature(advancestopo, advancestopo.objects.AssessedRussianAdvancesinUkraineJUL282024)
+const control = feature(controltopo, controltopo.objects.control)
+const advances = feature(advancestopo, advancestopo.objects.advances)
 
 console.log(advances)
 
@@ -250,16 +240,23 @@ style.sources.advances.data = advances
                 map.setLayoutProperty('road_secondary_tertiary_white', 'visibility', 'visible')
                 map.flyTo(presetbounds.cyCloseUp)
                 map.setLayoutProperty('Populated place', 'visibility', 'visible')
+                map.setLayoutProperty('Oblast-label', 'visibility', 'visible')
                 map.setLayoutProperty('hills', 'visibility', 'visible')
+                map.setLayoutProperty('Ridge-label', 'visibility', 'visible')
 
                 showTownLabels(map, ["Chasiv Yar", "Kramatorsk", "Sloviansk"])
                 makeTownLabelsBeefy(map)
+                map.setLayoutProperty('Country-label', 'visibility', 'none')
+
             }
         })
 
         scrolly.addTrigger({
             num: 5, do: () => {
                 // cancelAnimationFrame(reqAnimation)
+                map.setLayoutProperty('Ridge-label', 'visibility', 'none')
+                map.setLayoutProperty('Country-label', 'visibility', 'visible')
+
                 map.fitBounds(presetbounds.donetskOblastBounds, tradOpts)
                 map.setLayoutProperty('road_trunk_primary_white', 'visibility', 'visible')
                 map.setLayoutProperty('road_secondary_tertiary_white', 'visibility', 'visible')
