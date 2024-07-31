@@ -87,3 +87,8 @@
     margin: 0 auto;
     display: block;
 }
+
+.gv-caption {
+    color: white;
+    @include fs-textSans(2)
+}

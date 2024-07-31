@@ -19,9 +19,10 @@ export async function render() {
 
             html += `<div class="scroll-text__inner">
                 <div class="scroll-text__div">
-                    ${element.headingText && `<h2>${element.headingText}</h2>`}
-                    <p>${element.bodyText}</p>
+                    ${element.headingText ? `<h2>${element.headingText}</h2>` : ''}
+                    <p>${element.bodyText? element.bodyText : ''}</p>
                     ${element.img ? `<img class="gv-scrolly-image" src="${element.img}" alt="" />`: ''}
+                    ${element.caption ? `<span class="gv-caption">${element.caption}</span>` : ''}
                 </div>
             </div>`
         }
