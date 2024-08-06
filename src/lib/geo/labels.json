@@ -249,8 +249,8 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    37.70897244167577,
-                    48.681155519104124                ]
+                    37.75897244167577,
+                    48.641155519104124                ]
             }
         },
         {
@@ -291,6 +291,78 @@
                     36.074644901140914,
                     50.28139140768093]
             }
-        }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+              "name": "Donetsk"
+            },
+            "geometry": {
+              "coordinates": [
+                37.844457045150676,
+                48.005175719247944
+              ],
+              "type": "Point"
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "Populated place",
+            "name" : "Dnipro"},
+            "geometry": {
+              "coordinates": [
+                35.029583341876815,
+                48.48585282337794
+              ],
+              "type": "Point"
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "name" : "Sebastopol",
+              "Featurecla" : "Populated place"}
+            ,
+            "geometry": {
+              "coordinates": [
+                33.51478287855028,
+                44.62095746164724
+              ],
+              "type": "Point"
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "name": "Russia",
+              "featurecla": "country-far"
+            },
+            "geometry": {
+              "coordinates": [
+                38.6933007466001,
+                51.12801068871025
+              ],
+              "type": "Point"
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "featurecla" : "country-far",
+              "name" : "Ukraine"
+            },
+            "geometry": {
+              "coordinates": [
+                36.86209998761208,
+                48.821961701726735
+              ],
+              "type": "Point"
+            }
+          }
+      
+      
+      
     ]
 }

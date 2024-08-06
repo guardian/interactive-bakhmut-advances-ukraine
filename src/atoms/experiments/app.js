@@ -68,21 +68,21 @@ function rotateCamera() {
 
 const renderMap = async (webpEnabled) => {
 
-    const {urbantopo,oblaststopo,controltopo,advancestopo} = await fetchAllData()
+    const { urbantopo, oblaststopo, controltopo, advancestopo } = await fetchAllData()
 
-const urban = feature(urbantopo, urbantopo.objects.urban)
-const oblasts = feature(oblaststopo, oblaststopo.objects.oblasts)
-const control = feature(controltopo, controltopo.objects.control)
-const advances = feature(advancestopo, advancestopo.objects.advances)
+    const urban = feature(urbantopo, urbantopo.objects.urban)
+    const oblasts = feature(oblaststopo, oblaststopo.objects.oblasts)
+    const control = feature(controltopo, controltopo.objects.control)
+    const advances = feature(advancestopo, advancestopo.objects.advances)
 
-console.log(advances)
+    console.log(advances)
 
-style.sources.labels.data = labels
-style.sources.control.data = control
-style.sources.oblasts.data = oblasts
-style.sources.hotspots.data = hotspots
-style.sources.urban.data = urban
-style.sources.advances.data = advances
+    style.sources.labels.data = labels
+    style.sources.control.data = control
+    style.sources.oblasts.data = oblasts
+    style.sources.hotspots.data = hotspots
+    style.sources.urban.data = urban
+    style.sources.advances.data = advances
 
 
     // const topoFile = await fetch('__assetsPath__/ukraine_layers_parsed.json')
@@ -105,21 +105,17 @@ style.sources.advances.data = advances
     map = new mapGl({
         container: 'gv-wrapper',
         style: style,
-        bounds: bakhmutAndSouthBoundsWithChasivYar,
+        // bounds: bakhmutAndSouthBoundsWithChasivYar,
+        bounds: presetbounds.wholeFrontBounds,
         zoom: 11,
         maxZoom: 16,
         minZoom: 4,
-        pitch: 45,
+        pitch: 10,
         maxPitch: 85,
         interactive: false,
     })
     let nav = new NavigationControl({ showCompass: true, showZoom: false, visualizePitch: true })
     map.addControl(nav, 'top-left')
-
-    const renderOverlays = (date) => {
-        map.setLayoutProperty('overlays', 'visibility', 'visible')
-        map.setFilter('overlays', ["match", ['get', 'date'], date.replace(/\//g, '-'), true, false])
-    }
 
     const locatorMap = new LocatorComp(locatorWidth, locatorHeight, ukraine, ukraine.objects.UKR_adm0, map.getBounds(), { x: width - locatorWidth - 10, y: 0 })
     locatorMap.addLocator(svg)
@@ -129,7 +125,7 @@ style.sources.advances.data = advances
 
     let totalData = 0
 
-    const loader = $('.gv-loader');    const body = $('.article__body');    const bodyDesktop = $$('[data-gu-name="body"]')[0]; const locator = $('.locator-svg');     const compass = $('.maplibregl-ctrl.maplibregl-ctrl-group');     const scrollArrow = $('.gv-scrollarrow');     const iosBody = $('.ios') ;const androidBody = $('.android');    const meta = $('[data-gu-name="meta"]') ;const standfirst = $('[data-gu-name="standfirst"]') ; const headline = $('[data-gu-name="headline"]') ;const tags = $('.content__labels');    const metaApp = $('.meta__misc') ;const headlineApp = $('.headline') ;const standfirstApp = $('.standfirst')
+    const loader = $('.gv-loader'); const body = $('.article__body'); const bodyDesktop = $$('[data-gu-name="body"]')[0]; const locator = $('.locator-svg'); const compass = $('.maplibregl-ctrl.maplibregl-ctrl-group'); const scrollArrow = $('.gv-scrollarrow'); const iosBody = $('.ios'); const androidBody = $('.android'); const meta = $('[data-gu-name="meta"]'); const standfirst = $('[data-gu-name="standfirst"]'); const headline = $('[data-gu-name="headline"]'); const tags = $('.content__labels'); const metaApp = $('.meta__misc'); const headlineApp = $('.headline'); const standfirstApp = $('.standfirst')
 
 
     map.on('data', (e) => {
@@ -148,66 +144,61 @@ style.sources.advances.data = advances
         if (iosBody) iosBody.style.position = 'static'
         if (androidBody) androidBody.style.position = 'static'
 
-        map.on('click', 'oblasts', function (e) {
-            console.log(e.features);
-        });
+        // map.on('click', 'oblasts', function (e) {
+        //     console.log(e.features);
+        // });
 
         map.on('zoom', () => {
             locatorMap.updateLocator(map.getBounds())
         })
 
+        // MAP START SETTINGS GO HERE
+
+        map.setLayoutProperty('control', 'visibility', 'visible')
+        map.setLayoutProperty('advances-layer', 'visibility', 'visible')
+        map.setLayoutProperty('Populated place', 'visibility', 'visible')
+        map.setLayoutProperty('admin-4-boundary', 'visibility', 'none')
+        map.setLayoutProperty('Country-label-far', 'visibility', 'visible')
+
+        showTownLabels(map, ["Dnipro","Sebastopol","Kharkiv", "Donetsk"])
+        makeTownLabelsTidy(map)
+        locator.style.opacity = 1
+        compass.style.opacity = 1
+
+
+
         scrolly.addTrigger({
             num: 0, do: (d) => {
                 current = 0
                 //  map.fitBounds(bakhmutBounds)
-                map.fitBounds(bakhmutAndSouthBoundsWithChasivYar)
-                map.setLayoutProperty('Populated place', 'visibility', 'none')
-                map.setLayoutProperty('overlays', 'visibility', 'none')
-                map.setLayoutProperty('hills', 'visibility', 'visible')
-                bodyDesktop?.style.setProperty("--opacity", 1)
-                body?.style.setProperty("--opacity", 1)
-                locator.style.opacity = 0
-                compass.style.opacity = 0
-
-                if (headline) {
-                    headline.style.opacity = 1
-                    standfirst.style.opacity = 1
-                    meta.style.opacity = 1
-                    tags.style.opacity = 1
-                } else {
-                    metaApp.style.opacity = 1
-                    headlineApp.style.opacity = 1
-                    standfirstApp.style.opacity = 1
-                }
+                // map.fitBounds(presetbounds.easternFrontBounds, tradOpts)
+                // map.setLayoutProperty('Populated place', 'visibility', 'none')
+                // map.setLayoutProperty('overlays', 'visibility', 'none')
+                // map.setLayoutProperty('hills', 'visibility', 'visible')
             }
         }
-    )
+        )
+
+
 
         scrolly.addTrigger({
             num: 1, do: () => {
-                current = 1
-                cancelAnimationFrame(reqAnimation)
-                map.fitBounds(presetbounds.widerAreaBounds, presetbounds.widerAreaOpts)
-                // map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Sloviansk", "Chasiv Yar"], true, false])
-                showTownLabels(map, ["Bakhmut", "Kramatorsk", "Sloviansk", "Chasiv Yar"])
-                map.setLayoutProperty('Populated place', 'visibility', 'visible')
-                map.setLayoutProperty('overlays', 'visibility', 'none')
-                map.setLayoutProperty('hills', 'visibility', 'visible')
 
-                bodyDesktop?.style.setProperty("--opacity", 0)
-                body?.style.setProperty("--opacity", 0)
-                locator.style.opacity = 1
-                compass.style.opacity = 1
-                if (headline) {
-                    headline.style.opacity = 0
-                    standfirst.style.opacity = 0
-                    meta.style.opacity = 0
-                    tags.style.opacity = 0
-                } else {
-                    metaApp.style.opacity = 0
-                    headlineApp.style.opacity = 0
-                    standfirstApp.style.opacity = 0
-                }
+        
+        
+                // current = 1
+                // cancelAnimationFrame(reqAnimation)
+                // map.fitBounds(presetbounds.widerAreaBounds, presetbounds.widerAreaOpts)
+                // // map.setFilter('Populated place', ["match", ['get', 'name'], ["Bakhmut", "Kramatorsk", "Sloviansk", "Chasiv Yar"], true, false])
+                // showTownLabels(map, ["Bakhmut", "Kramatorsk", "Sloviansk", "Chasiv Yar"])
+
+
+
+                // map.setLayoutProperty('Populated place', 'visibility', 'visible')
+                // map.setLayoutProperty('hills', 'visibility', 'visible')
+
+                // map.setLayoutProperty('control', 'visibility', 'none')
+                // map.setLayoutProperty('advances-layer', 'visibility', 'none')
             }
         })
 
@@ -216,26 +207,20 @@ style.sources.advances.data = advances
                 bodyDesktop?.style.setProperty("--opacity", 0)
                 body?.style.setProperty("--opacity", 0)
                 // cancelAnimationFrame(reqAnimation)
-                map.fitBounds(presetbounds.widerAreaBounds, presetbounds.widerAreaOpts)
-            }
+                map.setLayoutProperty('Ridge-label', 'visibility', 'none')
+
+                map.setLayoutProperty('control', 'visibility', 'none')
+                map.setLayoutProperty('advances-layer', 'visibility', 'none')
+
+
+                showTownLabels(map, ["Bakhmut", "Chasiv Yar"])
+                // map.fitBounds(bakhmutBounds)
+                map.flyTo(presetbounds.bakhmutCloseUp)            }
         })
 
         scrolly.addTrigger({
             num: 3, do: () => {
-                bodyDesktop?.style.setProperty("--opacity", 0)
-                body?.style.setProperty("--opacity", 0)
-                // cancelAnimationFrame(reqAnimation)
-                map.setLayoutProperty('Area-control-label', 'visibility', 'none')
-                map.setLayoutProperty('Ridge-label', 'visibility', 'none')
-                showTownLabels(map, ["Bakhmut","Chasiv Yar"])
-                // map.fitBounds(bakhmutBounds)
-                map.flyTo(presetbounds.bakhmutCloseUp)
-            }
-        })
 
-        scrolly.addTrigger({
-            num: 4, do: () => {
-                // cancelAnimationFrame(reqAnimation)
                 map.setLayoutProperty('road_trunk_primary_white', 'visibility', 'visible')
                 map.setLayoutProperty('road_secondary_tertiary_white', 'visibility', 'visible')
                 map.flyTo(presetbounds.cyCloseUp)
@@ -248,27 +233,71 @@ style.sources.advances.data = advances
                 makeTownLabelsBeefy(map)
                 map.setLayoutProperty('Country-label', 'visibility', 'none')
 
+
+
+            }
+        })
+
+
+        scrolly.addTrigger({
+            num: 4, do: () => {
+                // cancelAnimationFrame(reqAnimation)
             }
         })
 
         scrolly.addTrigger({
-            num: 5, do: () => {
+            num: 5, do: () => { 
+                console.log("flying to pokrovsk")
+console.log(presetbounds.pokrovskBounds)
+
+map.fitBounds(presetbounds.pokrovskBounds, tradOpts)
+map.setLayoutProperty('control', 'visibility', 'visible')
+map.setLayoutProperty('advances-layer', 'visibility', 'visible')
+map.setLayoutProperty('Populated place', 'visibility', 'visible')
+map.setLayoutProperty('admin-4-boundary', 'visibility', 'visible')
+
+map.setLayoutProperty('hills', 'visibility', 'none')
+map.setLayoutProperty('Ridge-label', 'visibility', 'none')
+map.setLayoutProperty('Country-label-far', 'visibility', 'none')
+
+
+
+
+showTownLabels(map, ["Pokrovsk", "Kramatorsk", "Sloviansk", "Chasiv Yar", "Donetsk"])
+            }
+        })
+
+
+        scrolly.addTrigger({
+            num: 6, do: () => {
                 // cancelAnimationFrame(reqAnimation)
+            }
+        })
+
+        scrolly.addTrigger({
+            num: 7, do: () => { 
                 map.setLayoutProperty('Ridge-label', 'visibility', 'none')
-                map.setLayoutProperty('Country-label', 'visibility', 'visible')
+                map.setLayoutProperty('Country-label', 'visibility', 'none')
 
                 map.fitBounds(presetbounds.donetskOblastBounds, tradOpts)
                 map.setLayoutProperty('road_trunk_primary_white', 'visibility', 'visible')
                 map.setLayoutProperty('road_secondary_tertiary_white', 'visibility', 'visible')
-                map.setFilter('Populated place', ["match", ['get', 'name'], ["Pokrovsk", "Kupiansk", "Avdiivka", "Chasiv Yar"], true, false])
+                map.setFilter('Populated place', ["match", ['get', 'name'], ["Pokrovsk", "Kupiansk", "Avdiivka", "Donetsk", "Dnipro", "Lyman"], true, false])
+
                 map.setLayoutProperty('control', 'visibility', 'visible')
+                map.setLayoutProperty('advances-layer', 'visibility', 'visible')
+
                 makeTownLabelsTidy(map)
+
             }
         })
 
+
         scrolly.addTrigger({
-            num: 6, do: () => {
-                showTownLabels(map, ["Vovchansk", "Hlyboke", "Kharkiv","Belgorod"])
+            num: 8, do: () => {
+                map.setLayoutProperty('Country-label', 'visibility', 'visible')
+
+                showTownLabels(map, ["Vovchansk", "Hlyboke", "Kharkiv", "Belgorod"])
                 map.setLayoutProperty('hills', 'visibility', 'none')
                 map.flyTo(presetbounds.vovchanskCloseUp)
 
@@ -276,8 +305,13 @@ style.sources.advances.data = advances
         })
 
         scrolly.addTrigger({
-            num: 7, do: () => {
-                showTownLabels(map, ["Vovchansk", "Hlyboke", "Kharkiv","Belgorod"])
+            num: 9, do: () => { }
+        })
+
+
+        scrolly.addTrigger({
+            num: 10, do: () => {
+                showTownLabels(map, ["Vovchansk", "Hlyboke", "Kharkiv", "Belgorod"])
                 // map.setFilter('Area-control-label', ["match", ['get', 'name'], ["Russian\ncontrol", "Ukrainian\ncounteroffensive"], true, false])
             }
         })

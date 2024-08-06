@@ -445,9 +445,7 @@
                     1
                 ]
             ]
-        },
-
-        
+        },        
         {
             "id": "buildings",
             "source": "urban",
@@ -701,6 +699,37 @@
                 ],
                 "text-field": "{name}",
                 "text-variable-anchor": [
+                    "top-left"
+                ],
+                "text-radial-offset": 1,
+                "text-justify": "auto",
+                "visibility": "none"
+            },
+            "paint": {
+                "text-halo-color": "#333",
+                "text-halo-width": 1,
+                "text-halo-blur": 0.5,
+                "text-color": "white"
+            }
+        },
+        {
+            "id": "Country-label-far",
+            "type": "symbol",
+            "source": "labels",
+            "minzoom": 3,
+            "maxzoom": 22,
+            "filter": [
+                "==",
+                "featurecla",
+                "country-far"
+            ],
+            "layout": {
+                "text-size": 16,
+                "text-font": [
+                    "GH Guardian Headline Semibold"
+                ],
+                "text-field": "{name}",
+                "text-variable-anchor": [
                     "center"
                 ],
                 "text-radial-offset": 0.5,
@@ -793,5 +822,33 @@
                 ]
             ]
         }
+        ,
+        "also" :         {
+            "id": "admin-2-labels",
+            "type": "symbol",
+            "source": "vector-tiles",
+            "source-layer": "place",
+            "filter": [
+                "all",
+                [
+                    "==",
+                    "class",
+                    "country"
+                ]
+                        ],
+            "layout": {
+              "text-field": "{name:en}",
+              "text-font": ["Gdn Text Sans TS3Regular"],
+              "text-size": 14,
+              "text-anchor": "center",
+              "text-offset": [0, 0]
+            },
+            "paint": {
+              "text-color": "red",
+              "text-halo-color": "#ffffff",
+              "text-halo-width": 2
+            }
+          }
+
     }
 }

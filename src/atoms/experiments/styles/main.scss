@@ -90,5 +90,29 @@
 
 .gv-caption {
     color: white;
-    @include fs-textSans(2)
+    @include fs-textSans(2);
+    width: 100%;
+    padding-bottom: 4px;
 }
+
+.gv-video {
+    background-color: #161616;
+    max-width: 100%;
+    height: auto;
+    max-height: 80vh;
+}
+
+.gv-video-wrapper {
+    // width: 100%;
+    background-color: #161616;
+    margin-bottom: -7px;
+}
+
+.gv-chapter-heading {
+    display: none;
+}
+
+.scroll-text__div#blank {
+    opacity: 0;
+}
+

@@ -26,7 +26,7 @@ const bakhmutCloseUp = isMobile ?
     bearing: -62.81693712944023,
     pitch: 60, duration:
         1000,
-    zoom: 13.071195853786996
+    zoom: 11
 }
 
 const widerAreaBounds = [[37.4872599076183448, 48.5499422913235676], [38.0593925657791559, 48.8995789157551712]]
@@ -48,7 +48,7 @@ const cyCloseUp = isMobile ?
     bearing: -30,
     pitch: 70,
     duration: 1000,
-    zoom: 13.0
+    zoom: 12.5
 }
 
 const vovchanskCloseUp = isMobile ?
@@ -82,6 +82,15 @@ const easternFrontBounds = [ [ 28.44103186722913,
     44.1839000142466], [41.518976833204306,
         50.23284326408731]];
 
+const wholeFrontBounds = [
+    [   32.28761422488995,
+        44.29874787342672],
+    [
+        40.771643587698776,
+        50.33971948127598
+    ]
+]
+
 const donetskOblastBounds = [[
     36.27381996348822,
     46.67301716206242
@@ -90,5 +99,12 @@ const donetskOblastBounds = [[
     49.38658075881969
 ]]
 
+const pokrovskBounds = [
+    [        36.762743919415044,
+        48.000999561681084],
+    [ 37.770985675624274,
+        48.879430004129745]
+]
 
-export {example, bakhmutCloseUp, widerAreaBounds, widerAreaOpts, bakhmutOpts, cyCloseUp, vovchanskCloseUp, easternFrontBounds, chuhihiv, vovchansk, donetskOblastBounds}
+
+export {example, bakhmutCloseUp, widerAreaBounds, widerAreaOpts, bakhmutOpts, cyCloseUp, vovchanskCloseUp, easternFrontBounds, chuhihiv, vovchansk, donetskOblastBounds, pokrovskBounds, wholeFrontBounds}
