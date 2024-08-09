@@ -259,7 +259,7 @@ map.setLayoutProperty('admin-4-boundary', 'visibility', 'visible')
 map.setLayoutProperty('hills', 'visibility', 'none')
 map.setLayoutProperty('Ridge-label', 'visibility', 'none')
 map.setLayoutProperty('Country-label-far', 'visibility', 'none')
-
+map.setLayoutProperty('salient-label', 'visibility', 'visible')
 
 
 
@@ -276,6 +276,8 @@ showTownLabels(map, ["Pokrovsk", "Kramatorsk", "Sloviansk", "Chasiv Yar", "Donet
 
         scrolly.addTrigger({
             num: 7, do: () => { 
+                map.setLayoutProperty('salient-label', 'visibility', 'none')
+
                 map.setLayoutProperty('Ridge-label', 'visibility', 'none')
                 map.setLayoutProperty('Country-label', 'visibility', 'none')
 

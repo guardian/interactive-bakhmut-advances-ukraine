@@ -360,6 +360,20 @@
               ],
               "type": "Point"
             }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+                "featurecla": "salient",
+                "name": "Russian\nadvance"
+            },
+            "geometry": {
+              "coordinates": [
+                37.435335647177084,
+                48.239353477281526
+              ],
+              "type": "Point"
+            }
           }
       
       
