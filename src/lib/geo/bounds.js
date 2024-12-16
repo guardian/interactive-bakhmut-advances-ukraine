@@ -72,6 +72,11 @@ const bakhmutBounds = [
     [37.953904, 48.647324]
 ]
 
+const mayotteBounds = [
+    [45.07, -12.4],
+    [45.17, -14.6]
+]
+
 const bakhmutAndSouthBounds = [
     [38.070910, 48.490000],
     [37.898447460053035, 48.647324]
@@ -107,4 +112,4 @@ const pokrovskBounds = [
 ]
 
 
-export {example, bakhmutCloseUp, widerAreaBounds, widerAreaOpts, bakhmutOpts, cyCloseUp, vovchanskCloseUp, easternFrontBounds, chuhihiv, vovchansk, donetskOblastBounds, pokrovskBounds, wholeFrontBounds}
+export {example, bakhmutCloseUp, widerAreaBounds, widerAreaOpts, bakhmutOpts, cyCloseUp, vovchanskCloseUp, easternFrontBounds, chuhihiv, vovchansk, donetskOblastBounds, pokrovskBounds, wholeFrontBounds,mayotteBounds}

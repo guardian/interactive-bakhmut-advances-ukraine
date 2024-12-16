@@ -106,13 +106,13 @@ const renderMap = async (webpEnabled) => {
         container: 'gv-wrapper',
         style: style,
         // bounds: bakhmutAndSouthBoundsWithChasivYar,
-        bounds: presetbounds.wholeFrontBounds,
-        zoom: 11,
+        bounds: presetbounds.mayotteBounds,
+        zoom: 6,
         maxZoom: 16,
         minZoom: 4,
-        pitch: 10,
+        pitch: 60,
         maxPitch: 85,
-        interactive: false,
+        interactive: true,
     })
     let nav = new NavigationControl({ showCompass: true, showZoom: false, visualizePitch: true })
     map.addControl(nav, 'top-left')
